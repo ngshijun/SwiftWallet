@@ -64,7 +64,7 @@ const SignIn = ({ navigation }) => {
             >
                 <Image
                     source={images.wallieLogo}
-                    resizeMode="contain"
+                    resizeMode=""
                     style={{
                         width: "60%",
                     }}
