@@ -53,16 +53,21 @@ const SignIn = ({ navigation }) => {
             <View
                 style={{
                     marginTop: SIZES.padding * 5,
-                    height: 100,
+                    height: 50,
                     alignItems: "center",
                     justifyContent: "center",
+                    
                 }}
             >
                 <Image
                     source={images.wallieLogo}
                     resizeMode=""
                     style={{
-                        width: "60%",
+                        height: 150,
+                        width: 150,
+                        borderRadius: 50,
+                        borderWidth: 2,
+                        borderColor: "#333333"
                     }}
                 />
             </View>
@@ -73,52 +78,52 @@ const SignIn = ({ navigation }) => {
         return (
             <View
                 style={{
-                    marginTop: SIZES.padding * 3,
+                    marginTop: 70,
                     marginHorizontal: SIZES.padding * 3,
                 }}
             >
                 {/* Email */}
                 <View style={{ marginTop: SIZES.padding * 2 }}>
-                    <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
+                    <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
                         Email
                     </Text>
 
                     <TextInput
                         style={{
                             marginVertical: SIZES.padding,
-                            borderBottomColor: COLORS.white,
+                            borderBottomColor: "#FF7F11",
                             borderBottomWidth: 1,
                             height: 40,
-                            color: COLORS.white,
+                            color: "#FF7F11",
                             ...FONTS.body3,
                         }}
                         inputMode="email"
                         autoCapitalize="none"
                         onChangeText={(text) => setEmail(text)}
                         placeholder="Enter Email"
-                        placeholderTextColor={COLORS.white}
-                        selectionColor={COLORS.white}
+                        placeholderTextColor={"#333333"}
+                        selectionColor={"#FF7F11"}
                     />
                 </View>
 
                 {/* Password */}
                 <View style={{ marginTop: SIZES.padding * 2 }}>
-                    <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
+                    <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
                         Password
                     </Text>
                     <TextInput
                         style={{
                             marginVertical: SIZES.padding,
-                            borderBottomColor: COLORS.white,
+                            borderBottomColor: "#FF7F11",
                             borderBottomWidth: 1,
                             height: 40,
-                            color: COLORS.white,
+                            color: "#FF7F11",
                             ...FONTS.body3,
                         }}
                         onChangeText={(text) => setPassword(text)}
                         placeholder="Enter Password"
-                        placeholderTextColor={COLORS.white}
-                        selectionColor={COLORS.white}
+                        placeholderTextColor={"#333333"}
+                        selectionColor={"#FF7F11"}
                         secureTextEntry={!showPassword}
                     />
                     <TouchableOpacity
@@ -153,14 +158,14 @@ const SignIn = ({ navigation }) => {
                 <TouchableOpacity
                     style={{
                         height: 60,
-                        backgroundColor: COLORS.black,
+                        backgroundColor: "#FF7F11",
                         borderRadius: SIZES.radius / 1.5,
                         alignItems: "center",
                         justifyContent: "center",
                     }}
                     onPress={() => handleSignIn(email, password)}
                 >
-                    <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
+                    <Text style={{ color: "#333333", ...FONTS.h3 }}>
                         Sign In
                     </Text>
                 </TouchableOpacity>
@@ -178,10 +183,10 @@ const SignIn = ({ navigation }) => {
                 }}
                 onPress={() => navigation.navigate("SignUp")}
             >
-                <Text style={{ color: COLORS.white, ...FONTS.body3 }}>
+                <Text style={{ color: "#333333", ...FONTS.h3 }}>
                     New User?{" "}
                 </Text>
-                <Text style={{ color: COLORS.lightGreen, ...FONTS.h3 }}>
+                <Text style={{ color: "#FF7F11", ...FONTS.h3, textDecorationLine: 'underline' }}>
                     Sign Up
                 </Text>
             </TouchableOpacity>
@@ -194,7 +199,7 @@ const SignIn = ({ navigation }) => {
             style={{ flex: 1 }}
         >
             <LinearGradient
-                colors={[COLORS.lime, COLORS.emerald]}
+                colors={["#FFFFFF", "#FFFFFF"]}
                 style={{ flex: 1 }}
             >
                 <ScrollView>
