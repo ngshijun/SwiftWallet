@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-import { SignUp } from "./screens";
+import { SignUp, Login } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
@@ -27,8 +27,9 @@ const App = () => {
                 screenOptions={{
                     headerShown: false
                 }}
-                initialRouteName={'SignUp'}
+                initialRouteName={'Login'}
             >
+                <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="SignUp" component={SignUp} />
 
                 {/* Tabs */}
