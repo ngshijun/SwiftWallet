@@ -69,7 +69,7 @@ const SignUp = ({ navigation }) => {
                 style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    marginTop: SIZES.padding * 6,
+                    marginTop: SIZES.padding * 2,
                     paddingHorizontal: SIZES.padding * 2,
                 }}
             ></TouchableOpacity>
@@ -88,9 +88,13 @@ const SignUp = ({ navigation }) => {
             >
                 <Image
                     source={images.wallieLogo}
-                    resizeMode="contain"
+                    resizeMode=""
                     style={{
-                        width: "60%",
+                        height: 150,
+                        width: 150,
+                        borderRadius: 50,
+                        borderWidth: 2,
+                        borderColor: "#333333"
                     }}
                 />
             </View>
@@ -107,30 +111,30 @@ const SignUp = ({ navigation }) => {
             >
                 {/* Email */}
                 <View style={{ marginTop: SIZES.padding * 3 }}>
-                    <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
+                    <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
                         Email
                     </Text>
                     <TextInput
                         style={{
                             marginVertical: SIZES.padding,
-                            borderBottomColor: COLORS.white,
+                            borderBottomColor: "#FF7F11",
                             borderBottomWidth: 1,
                             height: 40,
-                            color: COLORS.white,
+                            color: "#FF7F11",
                             ...FONTS.body3,
                         }}
                         inputMode="email"
                         autoCapitalize="none"
                         onChangeText={(text) => setEmail(text)}
                         placeholder="Enter Email"
-                        placeholderTextColor={COLORS.white}
-                        selectionColor={COLORS.white}
+                        placeholderTextColor={"#333333"}
+                        selectionColor={"#FF7F11"}
                     />
                 </View>
 
                 {/* Phone Number */}
                 <View style={{ marginTop: SIZES.padding * 2 }}>
-                    <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
+                    <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
                         Phone Number
                     </Text>
 
@@ -154,7 +158,7 @@ const SignUp = ({ navigation }) => {
                                     style={{
                                         width: 10,
                                         height: 10,
-                                        tintColor: COLORS.white,
+                                        tintColor: "#FF7F11",
                                     }}
                                 />
                             </View>
@@ -182,7 +186,7 @@ const SignUp = ({ navigation }) => {
                             >
                                 <Text
                                     style={{
-                                        color: COLORS.white,
+                                        color: "#FF7F11",
                                         ...FONTS.body3,
                                     }}
                                 >
@@ -196,39 +200,39 @@ const SignUp = ({ navigation }) => {
                             style={{
                                 flex: 1,
                                 marginVertical: SIZES.padding,
-                                borderBottomColor: COLORS.white,
+                                borderBottomColor: "#FF7F11",
                                 borderBottomWidth: 1,
                                 height: 40,
-                                color: COLORS.white,
+                                color: "#FF7F11",
                                 ...FONTS.body3,
                             }}
                             onChangeText={(text) => setPhoneNumber(text)}
                             inputMode="tel"
                             placeholder="Enter Phone Number"
-                            placeholderTextColor={COLORS.white}
-                            selectionColor={COLORS.white}
+                            placeholderTextColor={"#333333"}
+                            selectionColor={"#FF7F11"}
                         />
                     </View>
                 </View>
 
                 {/* Password */}
                 <View style={{ marginTop: SIZES.padding * 2 }}>
-                    <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
+                    <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
                         Password
                     </Text>
                     <TextInput
                         style={{
                             marginVertical: SIZES.padding,
-                            borderBottomColor: COLORS.white,
+                            borderBottomColor: "#FF7F11",
                             borderBottomWidth: 1,
                             height: 40,
-                            color: COLORS.white,
+                            color: "#FF7F11",
                             ...FONTS.body3,
                         }}
                         onChangeText={(text) => setPassword(text)}
                         placeholder="Enter Password"
-                        placeholderTextColor={COLORS.white}
-                        selectionColor={COLORS.white}
+                        placeholderTextColor={"#333333"}
+                        selectionColor={"#FF7F11"}
                         secureTextEntry={!showPassword}
                     />
                     <TouchableOpacity
@@ -248,7 +252,7 @@ const SignUp = ({ navigation }) => {
                             style={{
                                 height: 20,
                                 width: 20,
-                                tintColor: COLORS.white,
+                                tintColor: "#FF7F11",
                             }}
                         />
                     </TouchableOpacity>
@@ -263,7 +267,7 @@ const SignUp = ({ navigation }) => {
                 <TouchableOpacity
                     style={{
                         height: 60,
-                        backgroundColor: COLORS.black,
+                        backgroundColor: "#FF7F11",
                         borderRadius: SIZES.radius / 1.5,
                         alignItems: "center",
                         justifyContent: "center",
@@ -274,7 +278,7 @@ const SignUp = ({ navigation }) => {
                         )
                     }
                 >
-                    <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
+                    <Text style={{ color: "#333333", ...FONTS.h3 }}>
                         Continue
                     </Text>
                 </TouchableOpacity>
@@ -326,7 +330,7 @@ const SignUp = ({ navigation }) => {
                             style={{
                                 height: 400,
                                 width: SIZES.width * 0.8,
-                                backgroundColor: COLORS.lightGreen,
+                                backgroundColor: "#D7DEDC",
                                 borderRadius: SIZES.radius,
                             }}
                         >
@@ -354,13 +358,14 @@ const SignUp = ({ navigation }) => {
                     flexDirection: "row",
                     marginTop: SIZES.padding * 2,
                     justifyContent: "center",
+                    marginBottom:100,
                 }}
                 onPress={() => navigation.navigate("SignIn")}
             >
-                <Text style={{ color: COLORS.white, ...FONTS.body3 }}>
+                <Text style={{ color: "#333333", ...FONTS.body3 }}>
                     Already have an account?{" "}
                 </Text>
-                <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
+                <Text style={{ color: "#FF7F11", ...FONTS.h3 }}>
                     Sign In
                 </Text>
             </TouchableOpacity>
@@ -373,7 +378,7 @@ const SignUp = ({ navigation }) => {
             style={{ flex: 1 }}
         >
             <LinearGradient
-                colors={[COLORS.lime, COLORS.emerald]}
+                colors={["#FFFFFF","#FFFFFF"]}
                 style={{ flex: 1 }}
             >
                 <ScrollView>
