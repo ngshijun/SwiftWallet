@@ -22,13 +22,17 @@ import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const SignUp = ({ navigation }) => {
     const signUp = async (email, countryCode, phoneNumber, password) => {
-        await addDoc(collection(db, "Users"), {
-            email,
-            countryCode,
-            phoneNumber,
-            password,
-        })
-        await createUserWithEmailAndPassword(auth, email, password)
+        try {
+            await addDoc(collection(db, "Users"), {
+                email,
+                countryCode,
+                phoneNumber,
+                password,
+            })
+            await createUserWithEmailAndPassword(auth, email, password)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const [showPassword, setShowPassword] = React.useState(false)

@@ -12,7 +12,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient"
 
 import { auth } from "../firebase"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword } from "@firebase/auth"
 
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
