@@ -8,6 +8,7 @@ import {
     TouchableOpacity
 } from "react-native"
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
+import { Button } from "react-native-web";
 
 const Home = () => {
 
@@ -15,58 +16,31 @@ const Home = () => {
         {
             id: 1,
             icon: icons.reload,
-            color: COLORS.purple,
-            backgroundColor: COLORS.lightpurple,
-            description: "Top Up"
+            //color: COLORS.yellow,
+            //backgroundColor: COLORS.lightpurple,
+            description: "Pay"
         },
         {
             id: 2,
             icon: icons.send,
-            color: COLORS.yellow,
-            backgroundColor: COLORS.lightyellow,
+            //color: COLORS.yellow,
+            // backgroundColor: COLORS.lightyellow,
             description: "Transfer"
         },
+
         {
             id: 3,
-            icon: icons.internet,
-            color: COLORS.primary,
-            backgroundColor: COLORS.lightGreen,
-            description: "Internet"
+            icon: icons.scan,
+            //color: COLORS.red,
+            // backgroundColor: COLORS.lightRed,
+            description: "Scan"
         },
         {
             id: 4,
-            icon: icons.wallet,
-            color: COLORS.red,
-            backgroundColor: COLORS.lightRed,
-            description: "Wallet"
-        },
-        {
-            id: 5,
-            icon: icons.bill,
-            color: COLORS.yellow,
-            backgroundColor: COLORS.lightyellow,
-            description: "Bill"
-        },
-        {
-            id: 6,
-            icon: icons.game,
-            color: COLORS.primary,
-            backgroundColor: COLORS.lightGreen,
-            description: "Games"
-        },
-        {
-            id: 7,
-            icon: icons.phone,
-            color: COLORS.red,
-            backgroundColor: COLORS.lightRed,
-            description: "Mobile Prepaid"
-        },
-        {
-            id: 8,
             icon: icons.more,
-            color: COLORS.purple,
-            backgroundColor: COLORS.lightpurple,
-            description: "More"
+            //color: COLORS.yellow,
+            //backgroundColor: COLORS.lightpurple,
+            description: "Exchange"
         },
     ]
 
@@ -104,7 +78,7 @@ const Home = () => {
         return (
             <View style={{ flexDirection: 'row', marginVertical: SIZES.padding * 2 }}>
                 <View style={{ flex: 1 }}>
-                    <Text style={{ ...FONTS.h1 }}>Hello!</Text>
+                    <Text style={{ ...FONTS.h1 }}>Swift</Text>
                     <Text style={{ ...FONTS.body2, color: COLORS.gray }}>ByProgrammers</Text>
                 </View>
 
@@ -145,24 +119,138 @@ const Home = () => {
         )
     }
 
-    function renderBanner() {
+    function renderLogo() {
         return (
             <View
                 style={{
-                    height: 120,
-                    borderRadius: 20,
+                    marginTop: SIZES.padding * 5,
+                    height: 100,
+                    alignItems: "center",
+                    justifyContent: "center",
                 }}
             >
                 <Image
-                    source={images.banner}
-                    resizeMode="cover"
+                    source={images.wallieLogo}
+                    resizeMode=""
                     style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: 20
+                        width: "60%",
                     }}
                 />
             </View>
+        )
+    }
+
+    function renderBanner() {
+        const renderItem = ({ item }) => (
+            <TouchableOpacity
+                style={{ marginBottom: SIZES.padding * 2, paddingBottom:10, width: 80, alignItems: 'center' }}
+                onPress={() => console.log(item.description)}
+            >
+                <View
+                    style={{
+                        height: 60,
+                        width: 50,
+                        borderRadius: 20,
+                        backgroundColor: item.backgroundColor,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+
+
+                    }}
+                >
+                    <Image
+                        source={item.icon}
+                        resizeMode="contain"
+                        style={{
+                            height: 30,
+                            width: 30,
+                            tintColor: item.color
+
+                        }}
+                    />
+                </View>
+                <Text style={{ textAlign: 'center', flexWrap: 'wrap', ...FONTS.body4 }}>{item.description}</Text>
+            </TouchableOpacity>
+        )
+        return (
+
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                <View
+                    style={{
+                        height: 150,
+                        width: 350,
+                        marginBottom: 5,
+                        borderRadius: 20,
+                        marginTop: 50,
+                        backgroundColor: "#D7DEDC",
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'relative', // Use relative positioning for the parent view
+                    }}
+                >
+                    {/* Content for the bottom view */}
+                    <FlatList
+                        data={features}
+                        numColumns={4}
+                        columnWrapperStyle={{ justifyContent: 'space-evenly',  }}
+                        keyExtractor={item => `${item.id}`}
+                        renderItem={renderItem}
+                        style={{ marginTop: 75 }}
+                    />
+                </View>
+                
+                <View
+                    style={{
+                        height: 100,
+                        width: 300,
+                        marginBottom: -100, // Move the top view up by 50 units
+                        borderRadius: 20,
+                        backgroundColor: "#FF7F11",
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'absolute', // Use absolute positioning for the top view
+                        top: 0, // Position it at the top of the parent view
+                    }}
+                >
+                    
+                    <Text style={{ ...FONTS.h1, marginBottom: 5 }}>SGD 88.50</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around',}}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                // Handle button press here
+                            }}
+                            style={{
+                                backgroundColor: '#333333',
+                                width: 100,
+                                marginRight: 20,
+                                padding: 10,
+                                borderRadius: 20,
+                                alignItems: 'center', // Center the content horizontally
+                            }}
+                        >
+                            <Text style={{ color: '#FFF', fontSize: 16 }}>Top Up</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                // Handle button press here
+                            }}
+                            style={{
+                                backgroundColor: '#333333',
+                                width: 100,
+                                marginLeft: 20,
+                                padding: 10,
+                                borderRadius: 20,
+                                alignItems: 'center', // Center the content horizontally
+                            }}
+                        >
+                            <Text style={{ color: '#FFF', fontSize: 16 }}>Withdraw</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
+                
+            </View>
+            
         )
     }
 
