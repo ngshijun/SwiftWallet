@@ -10,9 +10,7 @@ import {
     Platform,
 } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
-
 import { useAuth } from "../contexts/AuthContext"
-
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const SignIn = ({ navigation }) => {
