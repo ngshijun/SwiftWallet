@@ -41,7 +41,7 @@ const SignIn = ({ navigation }) => {
                 style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    marginTop: SIZES.padding * 6,
+                    marginTop: SIZES.padding * 2,
                     paddingHorizontal: SIZES.padding * 2,
                 }}
             ></TouchableOpacity>
@@ -143,7 +143,7 @@ const SignIn = ({ navigation }) => {
                             style={{
                                 height: 20,
                                 width: 20,
-                                tintColor: COLORS.white,
+                                tintColor: "#FF7F11"
                             }}
                         />
                     </TouchableOpacity>
@@ -178,12 +178,12 @@ const SignIn = ({ navigation }) => {
             <TouchableOpacity
                 style={{
                     flexDirection: "row",
-                    marginTop: SIZES.padding * 2,
+                    marginBottom: 100,
                     justifyContent: "center",
                 }}
                 onPress={() => navigation.navigate("SignUp")}
             >
-                <Text style={{ color: "#333333", ...FONTS.h3 }}>
+                <Text style={{ color: "#333333", ...FONTS.body3 }}>
                     New User?{" "}
                 </Text>
                 <Text style={{ color: "#FF7F11", ...FONTS.h3, textDecorationLine: 'underline' }}>
