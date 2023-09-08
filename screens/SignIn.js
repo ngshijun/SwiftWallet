@@ -3,11 +3,8 @@ import {
     View,
     Text,
     TouchableOpacity,
-    TouchableWithoutFeedback,
     Image,
     TextInput,
-    Modal,
-    FlatList,
     KeyboardAvoidingView,
     ScrollView,
     Platform,
@@ -33,30 +30,6 @@ const SignIn = ({ navigation }) => {
 
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
-
-    React.useEffect(() => {
-        fetch("https://restcountries.com/v3.1/all?fields=name,flags,cca3,idd")
-            .then((response) => response.json())
-            .then((data) => {
-                let areaData = data.map((item) => {
-                    return {
-                        code: item.cca3,
-                        name: item.name?.common,
-                        flag: item.flags.png,
-                        callingCode: item.idd?.root + item.idd?.suffixes[0],
-                    }
-                })
-                setAreas(areaData)
-
-                if (areaData.length > 0) {
-                    let defaultData = areaData.filter((a) => a.code == "US")
-
-                    if (defaultData.length > 0) {
-                        setSelectedArea(defaultData[0])
-                    }
-                }
-            })
-    }, [])
 
     function renderHeader() {
         return (
