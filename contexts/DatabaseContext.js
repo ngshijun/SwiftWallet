@@ -12,7 +12,6 @@ export function useDatabase() {
 export function DatabaseProvider({ children }) {
     const { user } = useAuth()
     const [email, setEmail] = useState("")
-    const [name, setName] = useState("")
     const [balance, setBalance] = useState(0)
     const [loading, setLoading] = useState(true)
 
@@ -26,7 +25,6 @@ export function DatabaseProvider({ children }) {
                 const data = querySnapshot.docs.map((doc) => doc.data())
                 console.log(data)
                 setEmail(data[0].email)
-                setName(data[0].name)
                 setBalance(data[0].balance)
             })
         }
@@ -36,7 +34,6 @@ export function DatabaseProvider({ children }) {
     const value = {
         email,
         balance,
-        name,
     }
 
     return (

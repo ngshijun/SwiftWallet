@@ -12,7 +12,7 @@ import { useDatabase } from "../contexts/DatabaseContext";
 
 const Home = () => {
 
-    const { email, balance, name } = useDatabase()
+    const { email, balance } = useDatabase()
 
     const featuresData = [
         {
@@ -81,7 +81,7 @@ const Home = () => {
             <View style={{ flexDirection: 'row', marginVertical: SIZES.padding * 2 }}>
                 <View style={{ flex: 1 }}>
                     <Text style={{ ...FONTS.h1 }}>Swift</Text>
-                    <Text style={{ ...FONTS.body2, color: COLORS.gray }}>{name}</Text>
+                    <Text style={{ ...FONTS.body2, color: COLORS.gray }}>{email}</Text>
                 </View>
 
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
