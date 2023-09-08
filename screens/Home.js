@@ -10,8 +10,8 @@ import {
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 import { useAuth } from "../contexts/AuthContext"
 
-const Home = () => {
-    const { email, balance } = useAuth()
+const Home = ({ navigation }) => {
+    const { userEmail, userBalance } = useAuth()
 
     const featuresData = [
         {
@@ -86,7 +86,7 @@ const Home = () => {
                 <View style={{ flex: 1 }}>
                     <Text style={{ ...FONTS.h1 }}>SwiftWallet</Text>
                     <Text style={{ ...FONTS.body2, color: COLORS.gray }}>
-                        {email}
+                        {userEmail}
                     </Text>
                 </View>
 
@@ -157,7 +157,7 @@ const Home = () => {
                     width: 80,
                     alignItems: "center",
                 }}
-                onPress={() => console.log(item.description)}
+                onPress={() => navigation.navigate(item.description)}
             >
                 <View
                     style={{
@@ -230,7 +230,7 @@ const Home = () => {
                     }}
                 >
                     <Text style={{ ...FONTS.h1, marginBottom: 5 }}>
-                        SGD {Number(balance).toFixed(2)}
+                        SGD {Number(userBalance).toFixed(2)}
                     </Text>
                     <View
                         style={{

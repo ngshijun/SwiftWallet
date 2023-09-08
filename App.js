@@ -8,7 +8,7 @@
 
 import React from "react"
 
-import { SignUp, SignIn } from "./screens"
+import { SignUp, SignIn, Transfer } from "./screens"
 import { createStackNavigator } from "@react-navigation/stack"
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
 import { useFonts } from "expo-font"
@@ -38,20 +38,25 @@ const App = () => {
     return (
         <NavigationContainer theme={theme}>
             <AuthProvider>
-                    <Stack.Navigator
-                        screenOptions={{
-                            headerShown: false,
-                        }}
-                        initialRouteName={"SignIn"}
-                    >
-                        <Stack.Screen name="SignUp" component={SignUp} />
-                        <Stack.Screen name="SignIn" component={SignIn} />
+                <Stack.Navigator
+                    screenOptions={{
+                        headerShown: true,
+                    }}
+                    initialRouteName={"SignIn"}
+                >
+                    <Stack.Screen name="SignUp" component={SignUp} />
+                    <Stack.Screen name="SignIn" component={SignIn} />
 
-                        {/* Tabs */}
-                        <Stack.Screen name="HomeTabs" component={Tabs} />
+                    {/* Tabs */}
+                    <Stack.Screen
+                        name="Home"
+                        component={Tabs}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen name="Transfer" component={Transfer} />
 
-                        {/* <Stack.Screen name="Scan" component={Scan} /> */}
-                    </Stack.Navigator>
+                    {/* <Stack.Screen name="Scan" component={Scan} /> */}
+                </Stack.Navigator>
             </AuthProvider>
         </NavigationContainer>
     )

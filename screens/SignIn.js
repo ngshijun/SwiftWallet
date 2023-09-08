@@ -19,14 +19,14 @@ const SignIn = ({ navigation }) => {
     const { login, user } = useAuth()
     useEffect(() => {
         if (user) {
-            navigation.navigate("HomeTabs")
+            navigation.navigate("Home")
         }
     }, [user])
 
     const handleSignIn = async (email, password) => {
         try {
             await login(email, password)
-            navigation.navigate("HomeTabs")
+            navigation.navigate("Home")
         } catch (e) {
             console.log(e)
         }

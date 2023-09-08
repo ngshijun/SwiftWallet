@@ -112,20 +112,16 @@ const Tabs = () => {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 0,
                     left: 0,
                     right: 0,
                     elevation: 0,
                     backgroundColor: "transparent",
                     borderTopColor: "transparent",
-                }
+                },
             }}
-            tabBar={(props) => (
-                <CustomTabBar
-                    props={props}
-                />
-            )}
+            tabBar={(props) => <CustomTabBar props={props} />}
         >
             <Tab.Screen
                 name="Home"
@@ -138,15 +134,13 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : COLORS.secondary
+                                tintColor: focused
+                                    ? COLORS.white
+                                    : COLORS.secondary,
                             }}
                         />
                     ),
-                    tabBarButton: (props) => (
-                        <TabBarCustomButton
-                            {...props}
-                        />
-                    )
+                    tabBarButton: (props) => <TabBarCustomButton {...props} />,
                 }}
             />
             <Tab.Screen
@@ -160,15 +154,13 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : COLORS.secondary
+                                tintColor: focused
+                                    ? COLORS.white
+                                    : COLORS.secondary,
                             }}
                         />
                     ),
-                    tabBarButton: (props) => (
-                        <TabBarCustomButton
-                            {...props}
-                        />
-                    )
+                    tabBarButton: (props) => <TabBarCustomButton {...props} />,
                 }}
             />
             <Tab.Screen
@@ -182,15 +174,13 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : COLORS.secondary
+                                tintColor: focused
+                                    ? COLORS.white
+                                    : COLORS.secondary,
                             }}
                         />
                     ),
-                    tabBarButton: (props) => (
-                        <TabBarCustomButton
-                            {...props}
-                        />
-                    )
+                    tabBarButton: (props) => <TabBarCustomButton {...props} />,
                 }}
             />
         </Tab.Navigator>

@@ -7,7 +7,13 @@ import {
     signOut,
     sendPasswordResetEmail,
 } from "@firebase/auth"
-import { addDoc, collection, onSnapshot, query, where } from "@firebase/firestore"
+import {
+    addDoc,
+    collection,
+    onSnapshot,
+    query,
+    where,
+} from "@firebase/firestore"
 
 const AuthContext = React.createContext()
 
@@ -17,11 +23,11 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState()
-    const [email, setEmail] = useState("")
+    const [userEmail, setUserEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [balance, setBalance] = useState(0)
-    const [countryCode, setCountryCode] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
+    const [userBalance, setUserBalance] = useState(0)
+    const [userCountryCode, setUserCountryCode] = useState("")
+    const [userPhoneNumber, setUserPhoneNumber] = useState("")
     const [loading, setLoading] = useState(true)
 
     async function signup(email, password, countryCode, phoneNumber) {
@@ -77,13 +83,16 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         if (user) {
-            const q = query(collection(db, "users"), where("email", "==", user.email))
+            const q = query(
+                collection(db, "users"),
+                where("email", "==", user.email)
+            )
             onSnapshot(q, (querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    setEmail(doc.data().email)
-                    setBalance(doc.data().balance)
-                    setCountryCode(doc.data().countryCode)
-                    setPhoneNumber(doc.data().phoneNumber)
+                    setUserEmail(doc.data().email)
+                    setUserBalance(doc.data().balance)
+                    setUserCountryCode(doc.data().countryCode)
+                    setUserPhoneNumber(doc.data().phoneNumber)
                 })
             })
         }
@@ -91,8 +100,10 @@ export function AuthProvider({ children }) {
 
     const value = {
         user,
-        balance,
-        email,
+        userBalance,
+        userEmail,
+        userCountryCode,
+        userPhoneNumber,
         signup,
         login,
         logout,
