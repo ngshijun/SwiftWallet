@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {
     View,
     Text,
@@ -17,10 +17,18 @@ import { signInWithEmailAndPassword } from "@firebase/auth"
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const SignIn = ({ navigation }) => {
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+            if (authUser) {
+                navigation.navigate("HomeTabs")
+            }
+        })
+        return unsubscribe
+    }, [])
+
     const handleSignIn = async (email, password) => {
         try {
             await signInWithEmailAndPassword(auth, email, password)
-            navigation.navigate("HomeTabs")
         } catch (e) {
             console.log(e)
         }
@@ -154,9 +162,7 @@ const SignIn = ({ navigation }) => {
                         alignItems: "center",
                         justifyContent: "center",
                     }}
-                    onPress={() =>
-                        handleSignIn(email, password)
-                    }
+                    onPress={() => handleSignIn(email, password)}
                 >
                     <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
                         Sign In
