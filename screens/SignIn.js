@@ -26,6 +26,7 @@ const SignIn = ({ navigation }) => {
     const handleSignIn = async (email, password) => {
         try {
             await login(email, password)
+            navigation.navigate("HomeTabs")
         } catch (e) {
             console.log(e)
         }

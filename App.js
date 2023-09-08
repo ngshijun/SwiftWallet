@@ -14,7 +14,6 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
 import { useFonts } from "expo-font"
 import { AuthProvider } from "./contexts/AuthContext"
 import Tabs from "./navigation/tabs"
-import { DatabaseProvider } from "./contexts/DatabaseContext"
 
 const theme = {
     ...DefaultTheme,
@@ -39,7 +38,6 @@ const App = () => {
     return (
         <NavigationContainer theme={theme}>
             <AuthProvider>
-                <DatabaseProvider>
                     <Stack.Navigator
                         screenOptions={{
                             headerShown: false,
@@ -54,7 +52,6 @@ const App = () => {
 
                         {/* <Stack.Screen name="Scan" component={Scan} /> */}
                     </Stack.Navigator>
-                </DatabaseProvider>
             </AuthProvider>
         </NavigationContainer>
     )

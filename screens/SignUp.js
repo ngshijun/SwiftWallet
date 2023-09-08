@@ -15,7 +15,6 @@ import {
 import { LinearGradient } from "expo-linear-gradient"
 
 import { useAuth } from "../contexts/AuthContext"
-import { collection, addDoc } from "@firebase/firestore"
 
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
@@ -23,14 +22,7 @@ const SignUp = ({ navigation }) => {
     const { signup } = useAuth()
     const signUp = async (email, countryCode, phoneNumber, password) => {
         try {
-            await addDoc(collection(db, "Users"), {
-                email,
-                countryCode,
-                phoneNumber,
-                password,
-                balance: 0,
-            })
-            await signup(email, password)
+            await signup(email, password, countryCode, phoneNumber)
         } catch (e) {
             console.log(e)
         }

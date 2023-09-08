@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
-import { auth } from "../firebase"
+import { auth, db } from "../firebase"
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -7,6 +7,7 @@ import {
     signOut,
     sendPasswordResetEmail,
 } from "@firebase/auth"
+import { addDoc, collection, onSnapshot, query, where } from "@firebase/firestore"
 
 const AuthContext = React.createContext()
 
@@ -16,10 +17,22 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [balance, setBalance] = useState(0)
+    const [countryCode, setCountryCode] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
     const [loading, setLoading] = useState(true)
 
-    async function signup(email, password) {
-        return createUserWithEmailAndPassword(auth, email, password)
+    async function signup(email, password, countryCode, phoneNumber) {
+        await addDoc(collection(db, "users"), {
+            email,
+            countryCode,
+            phoneNumber,
+            password,
+            balance: 0,
+        })
+        await createUserWithEmailAndPassword(auth, email, password)
     }
 
     async function login(email, password) {
@@ -62,8 +75,24 @@ export function AuthProvider({ children }) {
         return unsubscribe
     }, [])
 
+    useEffect(() => {
+        if (user) {
+            const q = query(collection(db, "users"), where("email", "==", user.email))
+            onSnapshot(q, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setEmail(doc.data().email)
+                    setBalance(doc.data().balance)
+                    setCountryCode(doc.data().countryCode)
+                    setPhoneNumber(doc.data().phoneNumber)
+                })
+            })
+        }
+    }, [user])
+
     const value = {
         user,
+        balance,
+        email,
         signup,
         login,
         logout,
