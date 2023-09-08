@@ -13,6 +13,8 @@ import { isIphoneX } from 'react-native-iphone-x-helper'
 
 import { Home, Scan } from "../screens"
 import { COLORS, icons } from "../constants"
+import historyIcon from '../assets/icons/history.png'
+import homeIcon from '../assets/icons/home.png'
 
 const Tab = createBottomTabNavigator()
 
@@ -52,8 +54,8 @@ const TabBarCustomButton = ({ accessibilityLabel, accessibilityState, children, 
                         width: 50,
                         height: 50,
                         borderRadius: 25,
-                        backgroundColor: COLORS.primary,
-                        ...styles.shadow
+                        backgroundColor: "#333333",
+                        
                     }}
                     onPress={onPress}
                 >
@@ -133,12 +135,34 @@ const Tabs = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Image
-                            source={icons.more}
+                            source={homeIcon}
                             resizeMode="contain"
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : COLORS.secondary
+                                tintColor: focused ? COLORS.white : "#333333"
+                            }}
+                        />
+                    ),
+                    tabBarButton: (props) => (
+                        <TabBarCustomButton
+                            {...props}
+                        />
+                    )
+                }}
+            />
+            <Tab.Screen
+                name="History"
+                component={Home}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <Image
+                            source={historyIcon}
+                            resizeMode="contain"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? COLORS.white : "#333333"
                             }}
                         />
                     ),
@@ -160,7 +184,7 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : COLORS.secondary
+                                tintColor: focused ? COLORS.white : "#333333"
                             }}
                         />
                     ),
@@ -171,8 +195,9 @@ const Tabs = () => {
                     )
                 }}
             />
+
             <Tab.Screen
-                name="User"
+                name="Profile"
                 component={Home}
                 options={{
                     tabBarIcon: ({ focused }) => (
@@ -182,7 +207,7 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : COLORS.secondary
+                                tintColor: focused ? COLORS.white : "#333333"
                             }}
                         />
                     ),
