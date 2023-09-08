@@ -105,23 +105,10 @@ const Home = ({ navigation }) => {
 
     function renderHeader() {
         return (
-            <View
-                style={{
-                    flexDirection: "row",
-                    marginVertical: SIZES.padding * 2,
-                }}
-            >
-                <View style={{ flex: 1 }}>
-                    <Text style={{ ...FONTS.h1 }}>SwiftWallet</Text>
-                    <Text style={{ ...FONTS.body2, color: COLORS.gray }}>
-                        {userEmail}
-                    </Text>
-                </View>
-
-                <View
-                    style={{ alignItems: "center", justifyContent: "center" }}
-                >
-                    <TouchableOpacity
+            <View style={{ flexDirection: 'row', marginVertical: SIZES.padding * 2 }}>
+                <View style={{ flex: 1, alignItems: "center", }}>
+                    <Image
+                        source={images.wallieLogo}
                         style={{
                             width: 100,
                             height: 100,
