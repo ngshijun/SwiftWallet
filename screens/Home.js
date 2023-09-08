@@ -8,7 +8,6 @@ import {
     TouchableOpacity,
 } from "react-native"
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
-import { Button } from "react-native-web";
 import payIcon from '../assets/icons/pay.png'
 import currencyIcon from '../assets/icons/currency.png'
 import { useAuth } from "../contexts/AuthContext"
@@ -115,7 +114,7 @@ const Home = ({ navigation }) => {
                 <View style={{ flex: 1 }}>
                     <Text style={{ ...FONTS.h1 }}>SwiftWallet</Text>
                     <Text style={{ ...FONTS.body2, color: COLORS.gray }}>
-                        {email}
+                        {userEmail}
                     </Text>
                 </View>
 
@@ -230,6 +229,7 @@ const Home = ({ navigation }) => {
                         <TouchableOpacity
                             onPress={() => {
                                 // Handle button press here
+                                navigation.navigate("TopUp")
                             }}
                             style={{
                                 backgroundColor: "#333333",

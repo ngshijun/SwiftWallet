@@ -8,7 +8,8 @@
 
 import React from "react"
 
-import { SignUp, SignIn, Transfer } from "./screens"
+import { StripeProvider } from "@stripe/stripe-react-native"
+import { SignUp, SignIn, Transfer, TopUp } from "./screens"
 import { createStackNavigator } from "@react-navigation/stack"
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
 import { useFonts } from "expo-font"
@@ -36,29 +37,35 @@ const App = () => {
         return null
     }
     return (
-        <NavigationContainer theme={theme}>
-            <AuthProvider>
-                <Stack.Navigator
-                    screenOptions={{
-                        headerShown: true,
-                    }}
-                    initialRouteName={"SignIn"}
-                >
-                    <Stack.Screen name="SignUp" component={SignUp} />
-                    <Stack.Screen name="SignIn" component={SignIn} />
+        <StripeProvider
+            publishableKey="pk_test_51NJF7YEn2jRr5EOoKwsEMyJhY5tydUvwZV6RhV1QUFzlHxCgs75ZQX4xLM4nPTI3tQVpJr6B2dYQqLpljaxJiDqr00gsfcpfiP"
+            urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
+            merchantIdentifier="merchant.com.SwiftWallet" // required for Apple Pay
+        >
+            <NavigationContainer theme={theme}>
+                <AuthProvider>
+                    <Stack.Navigator
+                        screenOptions={{
+                            headerShown: true,
+                        }}
+                        initialRouteName={"SignIn"}
+                    >
+                        <Stack.Screen name="SignUp" component={SignUp} />
+                        <Stack.Screen name="SignIn" component={SignIn} />
 
-                    {/* Tabs */}
-                    <Stack.Screen
-                        name="Home"
-                        component={Tabs}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen name="Transfer" component={Transfer} />
-
-                    {/* <Stack.Screen name="Scan" component={Scan} /> */}
-                </Stack.Navigator>
-            </AuthProvider>
-        </NavigationContainer>
+                        {/* Tabs */}
+                        <Stack.Screen
+                            name="Home"
+                            component={Tabs}
+                            options={{ headerShown: false }} 
+                        />
+                        <Stack.Screen name="Transfer" component={Transfer} />
+                        <Stack.Screen name="TopUp" component={TopUp} />                        
+                        {/* <Stack.Screen name="Scan" component={Scan} /> */}
+                    </Stack.Navigator>
+                </AuthProvider>
+            </NavigationContainer>
+        </StripeProvider>
     )
 }
 
