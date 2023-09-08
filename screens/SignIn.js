@@ -56,28 +56,7 @@ const SignIn = ({ navigation }) => {
                     marginTop: SIZES.padding * 6,
                     paddingHorizontal: SIZES.padding * 2,
                 }}
-                onPress={() => console.log("Sign Up")}
-            >
-                <Image
-                    source={icons.back}
-                    resizeMode="contain"
-                    style={{
-                        width: 20,
-                        height: 20,
-                        tintColor: COLORS.white,
-                    }}
-                />
-
-                <Text
-                    style={{
-                        marginLeft: SIZES.padding * 1.5,
-                        color: COLORS.white,
-                        ...FONTS.h4,
-                    }}
-                >
-                    Sign Up
-                </Text>
-            </TouchableOpacity>
+            ></TouchableOpacity>
         )
     }
 
@@ -110,26 +89,6 @@ const SignIn = ({ navigation }) => {
                     marginHorizontal: SIZES.padding * 3,
                 }}
             >
-                {/* Full Name */}
-                <View style={{ marginTop: SIZES.padding * 3 }}>
-                    <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
-                        Full Name
-                    </Text>
-                    <TextInput
-                        style={{
-                            marginVertical: SIZES.padding,
-                            borderBottomColor: COLORS.white,
-                            borderBottomWidth: 1,
-                            height: 40,
-                            color: COLORS.white,
-                            ...FONTS.body3,
-                        }}
-                        placeholder="Enter Full Name"
-                        placeholderTextColor={COLORS.white}
-                        selectionColor={COLORS.white}
-                    />
-                </View>
-
                 {/* Phone Number */}
                 <View style={{ marginTop: SIZES.padding * 2 }}>
                     <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
@@ -270,7 +229,7 @@ const SignIn = ({ navigation }) => {
                     onPress={() => navigation.navigate("HomeTabs")}
                 >
                     <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-                        Continue
+                        Sign In
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -341,6 +300,26 @@ const SignIn = ({ navigation }) => {
         )
     }
 
+    function renderNewUser() {
+        return (
+            <TouchableOpacity
+                style={{
+                    flexDirection: "row",
+                    marginTop: SIZES.padding * 2,
+                    justifyContent: "center",
+                }}
+                onPress={() => navigation.navigate("SignUp")}
+            >
+                <Text style={{ color: COLORS.white, ...FONTS.body3 }}>
+                    New User?{" "}
+                </Text>
+                <Text style={{ color: COLORS.lightGreen, ...FONTS.h3 }}>
+                    Sign Up
+                </Text>
+            </TouchableOpacity>
+        )
+    }
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
@@ -355,6 +334,7 @@ const SignIn = ({ navigation }) => {
                     {renderLogo()}
                     {renderForm()}
                     {renderButton()}
+                    {renderNewUser()}
                 </ScrollView>
             </LinearGradient>
             {renderAreaCodesModal()}

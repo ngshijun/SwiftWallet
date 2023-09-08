@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import { SignUp } from "./screens";
+import { SignUp, SignIn } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -40,9 +40,10 @@ const App = () => {
                 screenOptions={{
                     headerShown: false
                 }}
-                initialRouteName={'SignUp'}
+                initialRouteName={'SignIn'}
             >
                 <Stack.Screen name="SignUp" component={SignUp} />
+                <Stack.Screen name="SignIn" component={SignIn} />
 
                 {/* Tabs */}
                 <Stack.Screen name="HomeTabs" component={Tabs} />

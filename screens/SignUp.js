@@ -57,19 +57,7 @@ const SignUp = ({ navigation }) => {
                     marginTop: SIZES.padding * 6,
                     paddingHorizontal: SIZES.padding * 2
                 }}
-                onPress={() => console.log("Sign Up")}
             >
-                <Image
-                    source={icons.back}
-                    resizeMode="contain"
-                    style={{
-                        width: 20,
-                        height: 20,
-                        tintColor: COLORS.white
-                    }}
-                />
-
-                <Text style={{ marginLeft: SIZES.padding * 1.5, color: COLORS.white, ...FONTS.h4 }}>Sign Up</Text>
             </TouchableOpacity>
         )
     }
@@ -302,6 +290,22 @@ const SignUp = ({ navigation }) => {
         )
     }
 
+    function renderSignIn() {
+        return (
+            <TouchableOpacity
+                style={{
+                    flexDirection: 'row',
+                    marginTop: SIZES.padding * 2,
+                    justifyContent: 'center'
+                }}
+                onPress={() => navigation.navigate("SignIn")}
+            >
+                <Text style={{ color: COLORS.white, ...FONTS.body3 }}>Already have an account? </Text>
+                <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Sign In</Text>
+            </TouchableOpacity>
+        )
+    }
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
@@ -316,6 +320,7 @@ const SignUp = ({ navigation }) => {
                     {renderLogo()}
                     {renderForm()}
                     {renderButton()}
+                    {renderSignIn()}
                 </ScrollView>
             </LinearGradient>
             {renderAreaCodesModal()}
