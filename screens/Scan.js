@@ -3,23 +3,33 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
-    Vibration,
+    TouchableOpacity
 } from "react-native"
-import { Camera, CameraType } from 'react-native-camera-kit';
+import { Camera } from 'expo-camera'
 import { COLORS, FONTS, SIZES, icons, images } from "../constants";
 
 const Scan = ({ navigation }) => {
+    const [hasPermission, setHasPermission] = React.useState(null);
+
+    React.useEffect(() => {
+        (async () => {
+          const { status } = await Camera.requestCameraPermissionsAsync();
+          setHasPermission(status === 'granted');
+        })();
+      }, []);
+
+    if (hasPermission === null) {
+        return <View />;
+    }
+    if (hasPermission === false) {
+        return <Text>No access to camera</Text>;
+    }
     
+    
+
     function renderHeader() {
         return (
-            <View style={{ 
-                    width: SIZES.width,
-                    flexDirection: 'row', 
-                    marginTop: SIZES.padding * 4, 
-                    paddingHorizontal: SIZES.padding * 3, 
-                    backgroundColor: COLORS.transparent 
-            }}>
+            <View style={{ flexDirection: 'row', marginTop: SIZES.padding * 4, paddingHorizontal: SIZES.padding * 3 }}>
                 <TouchableOpacity
                     style={{
                         width: 45,
@@ -62,6 +72,28 @@ const Scan = ({ navigation }) => {
                         }}
                     />
                 </TouchableOpacity>
+            </View>
+        )
+    }
+
+    function renderScanFocus() {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+            >
+                <Image
+                    source={images.focus}
+                    resizeMode="stretch"
+                    style={{
+                        marginTop: "-55%",
+                        width: 200,
+                        height: 300
+                    }}
+                />
             </View>
         )
     }
@@ -162,34 +194,26 @@ const Scan = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: COLORS.transparent }}>
-            
             <Camera
                 ref={ref => {
                     this.camera = ref
                 }}
                 style={{ flex: 1 }}
-                cameraType={CameraType.Back}
-                flashMode="off"
-                scanBarcode
-                frameColor="white"
-                laserColor="red"
-                showFrame={true}
-
-                onReadCode={(event) => {
-                    Vibration.vibrate(100);
-                    // setBarcode(event.nativeEvent.codeStringValue);
-                    console.log('barcode', event.nativeEvent.codeStringValue);
-                  }}
-            />
-            <View style={{ position: 'absolute', backgroundColor: COLORS.transparent}}>
+                captureAudio={false}
+                type={Camera.Constants.Type.back}
+                flashMode={Camera.Constants.FlashMode.off}
+                onBarCodeScanned={onBarCodeRead}
+                androidCameraPermissionOptions={{
+                    title: "Permission to use camera",
+                    message: "Camera is required for barcode scanning",
+                    buttonPositive: "OK",
+                    buttonNegative: "Cancel"
+                }}
+            >
                 {renderHeader()}
-                {/* {renderScanFocus()} */}
-                
-
-            </View>
-            
-            {renderPaymentMethods()} 
-            
+                {renderScanFocus()}
+                {renderPaymentMethods()}
+            </Camera>
         </View>
     )
 }

@@ -12,7 +12,7 @@ import {
     ScrollView,
     Platform
 } from "react-native"
-import LinearGradient from 'react-native-linear-gradient'
+import { LinearGradient } from 'expo-linear-gradient'
 
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
@@ -57,7 +57,7 @@ const SignUp = ({ navigation }) => {
                     marginTop: SIZES.padding * 6,
                     paddingHorizontal: SIZES.padding * 2
                 }}
-                onPress={() => navigation.navigate("Login")}
+                onPress={() => console.log("Sign Up")}
             >
                 <Image
                     source={icons.back}
