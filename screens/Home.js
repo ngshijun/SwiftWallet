@@ -84,7 +84,7 @@ const Home = () => {
                 }}
             >
                 <View style={{ flex: 1 }}>
-                    <Text style={{ ...FONTS.h1 }}>Swift</Text>
+                    <Text style={{ ...FONTS.h1 }}>SwiftWallet</Text>
                     <Text style={{ ...FONTS.body2, color: COLORS.gray }}>
                         {email}
                     </Text>
