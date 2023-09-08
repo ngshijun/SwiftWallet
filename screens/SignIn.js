@@ -11,24 +11,21 @@ import {
 } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 
-import { auth } from "../firebase"
-import { signInWithEmailAndPassword } from "@firebase/auth"
+import { useAuth } from "../contexts/AuthContext"
 
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const SignIn = ({ navigation }) => {
+    const { login, user } = useAuth()
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                navigation.navigate("HomeTabs")
-            }
-        })
-        return unsubscribe
-    }, [])
+        if (user) {
+            navigation.navigate("HomeTabs")
+        }
+    }, [user])
 
     const handleSignIn = async (email, password) => {
         try {
-            await signInWithEmailAndPassword(auth, email, password)
+            await login(email, password)
         } catch (e) {
             console.log(e)
         }

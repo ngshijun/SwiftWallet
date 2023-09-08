@@ -8,9 +8,11 @@ import {
     TouchableOpacity
 } from "react-native"
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
-import { Button } from "react-native-web";
+import { useDatabase } from "../contexts/DatabaseContext";
 
 const Home = () => {
+
+    const { email, balance, name } = useDatabase()
 
     const featuresData = [
         {
@@ -79,7 +81,7 @@ const Home = () => {
             <View style={{ flexDirection: 'row', marginVertical: SIZES.padding * 2 }}>
                 <View style={{ flex: 1 }}>
                     <Text style={{ ...FONTS.h1 }}>Swift</Text>
-                    <Text style={{ ...FONTS.body2, color: COLORS.gray }}>ByProgrammers</Text>
+                    <Text style={{ ...FONTS.body2, color: COLORS.gray }}>{name}</Text>
                 </View>
 
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -213,7 +215,7 @@ const Home = () => {
                     }}
                 >
                     
-                    <Text style={{ ...FONTS.h1, marginBottom: 5 }}>SGD 88.50</Text>
+                    <Text style={{ ...FONTS.h1, marginBottom: 5 }}>SGD {Number(balance).toFixed(2)}</Text>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around',}}>
                         <TouchableOpacity
                             onPress={() => {

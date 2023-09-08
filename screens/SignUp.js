@@ -14,13 +14,13 @@ import {
 } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 
-import { auth, db } from "../firebase"
-import { createUserWithEmailAndPassword } from "@firebase/auth"
+import { useAuth } from "../contexts/AuthContext"
 import { collection, addDoc } from "@firebase/firestore"
 
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const SignUp = ({ navigation }) => {
+    const { signup } = useAuth()
     const signUp = async (email, countryCode, phoneNumber, password) => {
         try {
             await addDoc(collection(db, "Users"), {
@@ -28,8 +28,9 @@ const SignUp = ({ navigation }) => {
                 countryCode,
                 phoneNumber,
                 password,
+                balance: 0,
             })
-            await createUserWithEmailAndPassword(auth, email, password)
+            await signup(email, password)
         } catch (e) {
             console.log(e)
         }
