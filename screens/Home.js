@@ -1,18 +1,21 @@
-import React from "react";
+import React from "react"
 import {
     SafeAreaView,
     View,
     Text,
     Image,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
 } from "react-native"
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 import { Button } from "react-native-web";
 import payIcon from '../assets/icons/pay.png'
 import currencyIcon from '../assets/icons/currency.png'
+import { useAuth } from "../contexts/AuthContext"
+
 
 const Home = () => {
+    const { email, balance } = useAuth()
 
     const featuresData = [
         {
@@ -20,14 +23,14 @@ const Home = () => {
             icon: payIcon,
             //color: COLORS.yellow,
             //backgroundColor: COLORS.lightpurple,
-            description: "Pay"
+            description: "Pay",
         },
         {
             id: 2,
             icon: icons.send,
             //color: COLORS.yellow,
             // backgroundColor: COLORS.lightyellow,
-            description: "Transfer"
+            description: "Transfer",
         },
 
         {
@@ -35,14 +38,14 @@ const Home = () => {
             icon: icons.scan,
             //color: COLORS.red,
             // backgroundColor: COLORS.lightRed,
-            description: "Scan"
+            description: "Scan",
         },
         {
             id: 4,
             icon: currencyIcon,
             //color: COLORS.yellow,
             //backgroundColor: COLORS.lightpurple,
-            description: "Exchange"
+            description: "Exchange",
         },
     ]
 
@@ -95,7 +98,6 @@ const Home = () => {
             img: images.promoBanner,
             title: " Holiday",
             amount: "500 SGD",
-
         },
     ]
 
@@ -118,9 +120,6 @@ const Home = () => {
                         }}
                     />
                 </View>
-
-                
-
             </View>
         )
     }
@@ -129,7 +128,12 @@ const Home = () => {
     function renderBanner() {
         const renderItem = ({ item }) => (
             <TouchableOpacity
-                style={{ marginBottom: SIZES.padding * 2, paddingBottom:10, width: 80, alignItems: 'center' }}
+                style={{
+                    marginBottom: SIZES.padding * 2,
+                    paddingBottom: 10,
+                    width: 80,
+                    alignItems: "center",
+                }}
                 onPress={() => console.log(item.description)}
             >
                 <View
@@ -138,10 +142,8 @@ const Home = () => {
                         width: 50,
                         borderRadius: 20,
                         backgroundColor: item.backgroundColor,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-
-
+                        alignItems: "center",
+                        justifyContent: "center",
                     }}
                 >
                     <Image
@@ -150,17 +152,23 @@ const Home = () => {
                         style={{
                             height: 30,
                             width: 30,
-                            tintColor: item.color
-
+                            tintColor: item.color,
                         }}
                     />
                 </View>
-                <Text style={{ textAlign: 'center', flexWrap: 'wrap', ...FONTS.body4 }}>{item.description}</Text>
+                <Text
+                    style={{
+                        textAlign: "center",
+                        flexWrap: "wrap",
+                        ...FONTS.body4,
+                    }}
+                >
+                    {item.description}
+                </Text>
             </TouchableOpacity>
         )
         return (
-
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
                 <View
                     style={{
                         height: 150,
@@ -169,22 +177,22 @@ const Home = () => {
                         borderRadius: 20,
                         marginTop: 50,
                         backgroundColor: "#D7DEDC",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: 'relative', // Use relative positioning for the parent view
+                        alignItems: "center",
+                        justifyContent: "center",
+                        position: "relative", // Use relative positioning for the parent view
                     }}
                 >
                     {/* Content for the bottom view */}
                     <FlatList
                         data={features}
                         numColumns={4}
-                        columnWrapperStyle={{ justifyContent: 'space-evenly',  }}
-                        keyExtractor={item => `${item.id}`}
+                        columnWrapperStyle={{ justifyContent: "space-evenly" }}
+                        keyExtractor={(item) => `${item.id}`}
                         renderItem={renderItem}
                         style={{ marginTop: 75 }}
                     />
                 </View>
-                
+
                 <View
                     style={{
                         height: 100,
@@ -192,51 +200,58 @@ const Home = () => {
                         marginBottom: -100, // Move the top view up by 50 units
                         borderRadius: 20,
                         backgroundColor: "#FF7F11",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: 'absolute', // Use absolute positioning for the top view
+                        alignItems: "center",
+                        justifyContent: "center",
+                        position: "absolute", // Use absolute positioning for the top view
                         top: 0, // Position it at the top of the parent view
                     }}
                 >
-                    
-                    <Text style={{ ...FONTS.h1, marginBottom: 5 }}>SGD 88.50</Text>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-around',}}>
+                    <Text style={{ ...FONTS.h1, marginBottom: 5 }}>
+                        SGD {Number(balance).toFixed(2)}
+                    </Text>
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            justifyContent: "space-around",
+                        }}
+                    >
                         <TouchableOpacity
                             onPress={() => {
                                 // Handle button press here
                             }}
                             style={{
-                                backgroundColor: '#333333',
+                                backgroundColor: "#333333",
                                 width: 100,
                                 marginRight: 20,
                                 padding: 10,
                                 borderRadius: 20,
-                                alignItems: 'center', // Center the content horizontally
+                                alignItems: "center", // Center the content horizontally
                             }}
                         >
-                            <Text style={{ color: '#FFF', fontSize: 16 }}>Top Up</Text>
+                            <Text style={{ color: "#FFF", fontSize: 16 }}>
+                                Top Up
+                            </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => {
                                 // Handle button press here
                             }}
                             style={{
-                                backgroundColor: '#333333',
+                                backgroundColor: "#333333",
                                 width: 100,
                                 marginLeft: 20,
                                 padding: 10,
                                 borderRadius: 20,
-                                alignItems: 'center', // Center the content horizontally
+                                alignItems: "center", // Center the content horizontally
                             }}
                         >
-                            <Text style={{ color: '#FFF', fontSize: 16 }}>Withdraw</Text>
+                            <Text style={{ color: "#FFF", fontSize: 16 }}>
+                                Withdraw
+                            </Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
-                
             </View>
-            
         )
     }
 
@@ -285,7 +300,6 @@ const Home = () => {
                         height: SIZES.width / 2.5,
                         width: SIZES.width / 2.5,
                         alignItems: 'center',
-
                     }}
                 >
                     <Image
@@ -330,6 +344,7 @@ const Home = () => {
 
     function renderVault() {
 
+
         const HeaderComponent = () => (
             <View>
                 {renderHeader()}
@@ -343,20 +358,19 @@ const Home = () => {
         const renderVaultHeader = () => (
             <View
                 style={{
-                    flexDirection: 'row',
-                    marginBottom: SIZES.padding
+                    flexDirection: "row",
+                    marginBottom: SIZES.padding,
                 }}
             >
                 <View style={{ flex: 1 }}>
                     <Text style={{ ...FONTS.h1 }}>Vaults</Text>
                 </View>
-                <TouchableOpacity
-                    onPress={() => console.log("View All")}
-                >
-                    <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>View All</Text>
+                <TouchableOpacity onPress={() => console.log("View All")}>
+                    <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>
+                        View All
+                    </Text>
                 </TouchableOpacity>
             </View>
-
         )
 
         const renderItem = ({ item }) => (
@@ -364,7 +378,6 @@ const Home = () => {
                 style={{
                     marginVertical: SIZES.base,
                     width: SIZES.width / 2.5,
-
                 }}
                 onPress={() => console.log(item.title)}
             >
@@ -377,7 +390,6 @@ const Home = () => {
                         height: SIZES.width / 2.5,
                         width: SIZES.width / 2.5,
                         alignItems: 'center',
-
                     }}
                 >
                     <Image
@@ -392,7 +404,6 @@ const Home = () => {
                             tintColor: item.color
                         }}
                     />
-                
                     <Text style={{ ...FONTS.h4 }}>{item.title}</Text>
                     <Text style={{ ...FONTS.body4 }}>{item.description}</Text>
                 </View>
@@ -409,10 +420,7 @@ const Home = () => {
                 keyExtractor={item => `${item.id}`}
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
-                ListFooterComponent={
-                    <View style={{ marginBottom: 80 }}>
-                    </View>
-                }
+                ListFooterComponent={<View style={{ marginBottom: 80 }}></View>}
             />
             
         )
@@ -426,4 +434,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Home
