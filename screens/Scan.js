@@ -1,8 +1,14 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
 import { db } from "../firebase";
 import { doc, getDoc } from "@firebase/firestore";
-import { Camera } from "expo-camera";
+import {
+    View,
+    Text,
+    TextInput,
+    Image,
+    TouchableOpacity
+} from "react-native"
+import { Camera } from 'expo-camera'
 import { COLORS, FONTS, SIZES, icons, images } from "../constants";
 import QRIcon from "../assets/icons/qr-code.png";
 
@@ -192,6 +198,7 @@ const Scan = ({ navigation }) => {
                 name: doc.data().username,
             });
         });
+
     }
 
     return (

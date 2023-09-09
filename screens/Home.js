@@ -8,20 +8,39 @@ import {
     TouchableOpacity,
 } from "react-native"
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
-import payIcon from '../assets/icons/pay.png'
-import currencyIcon from '../assets/icons/currency.png'
-import sgIcon from '../assets/icons/singapore.png'
-import myIcon from '../assets/icons/malaysia.png'
-import usaIcon from '../assets/icons/united-states-of-america.png'
-import hkIcon from '../assets/icons/hong-kong.png'
-import holidyIcon from '../assets/icons/vacation.png'
-import savingIcon from '../assets/icons/saving.png'
-import shoppingIcon from '../assets/icons/shopping.png'
-import educationIcon from '../assets/icons/education.png'
+import payIcon from "../assets/icons/pay.png"
+import currencyIcon from "../assets/icons/currency.png"
+import ukIcon from "../assets/icons/united-kingdom.png"
+import myIcon from "../assets/icons/malaysia.png"
+import usaIcon from "../assets/icons/united-states-of-america.png"
+import euIcon from "../assets/icons/european.png"
+import holidyIcon from "../assets/icons/vacation.png"
+import savingIcon from "../assets/icons/saving.png"
+import shoppingIcon from "../assets/icons/shopping.png"
+import educationIcon from "../assets/icons/education.png"
 
 import { useAuth } from "../contexts/AuthContext"
 
 const Home = ({ navigation }) => {
+    const [rate, setRate] = React.useState([])
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            var requestURL =
+                "https://api.exchangerate.host/latest?base=SGD&symbols=MYR,USD,GBP,EUR"
+            var request = new XMLHttpRequest()
+            request.open("GET", requestURL)
+            request.responseType = "json"
+            request.send()
+
+            request.onload = function () {
+                var response = request.response
+                setRate(response.rates)
+                console.log(response.rates)
+            }
+        }, 5000)
+        return () => clearInterval(timer)
+    }, [])
+
     const { userEmail, userBalance } = useAuth()
 
     const featuresData = [
@@ -59,23 +78,23 @@ const Home = ({ navigation }) => {
     const currencyData = [
         {
             id: 1,
-            img: sgIcon,
-            title: "SGD 88.50",
+            img: ukIcon,
+            title: "GBP",
         },
         {
             id: 2,
             img: usaIcon,
-            title: "USD 49.3",
+            title: "USD",
         },
         {
             id: 3,
             img: myIcon,
-            title: "MYR 56.00",
+            title: "MYR" ,
         },
         {
             id: 4,
-            img: hkIcon,
-            title: "HKD 300,66",
+            img: euIcon,
+            title: "EUR",
         },
     ]
 
@@ -85,7 +104,6 @@ const Home = ({ navigation }) => {
             img: shoppingIcon,
             title: "Shopping",
             amount: "230 SGD",
-
         },
         {
             id: 2,
@@ -98,7 +116,6 @@ const Home = ({ navigation }) => {
             img: educationIcon,
             title: "Education",
             amount: "500 SGD",
-
         },
         {
             id: 4,
@@ -114,23 +131,27 @@ const Home = ({ navigation }) => {
 
     function renderHeader() {
         return (
-            <View style={{ flexDirection: 'row', marginVertical: SIZES.padding * 2 }}>
-                <View style={{ flex: 1, alignItems: "center", }}>
+            <View
+                style={{
+                    flexDirection: "row",
+                    marginVertical: SIZES.padding * 2,
+                }}
+            >
+                <View style={{ flex: 1, alignItems: "center" }}>
                     <Image
                         source={images.wallieLogo}
                         style={{
                             width: 100,
                             height: 100,
-                            borderRadius:100,
+                            borderRadius: 100,
                             alignItems: "center",
-                            borderWidth:  1,
+                            borderWidth: 1,
                         }}
                     />
                 </View>
             </View>
         )
     }
-
 
     function renderBanner() {
         const renderItem = ({ item }) => (
@@ -243,6 +264,7 @@ const Home = ({ navigation }) => {
                         <TouchableOpacity
                             onPress={() => {
                                 // Handle button press here
+                                navigation.navigate("Withdraw")
                             }}
                             style={{
                                 backgroundColor: "#333333",
@@ -264,30 +286,26 @@ const Home = ({ navigation }) => {
     }
 
     function renderCurrency() {
-
         const HeaderComponent = () => (
-            <View style={{ marginTop:30, }}>
-                {renderCurrencyHeader()}
-            </View>
+            <View style={{ marginTop: 30 }}>{renderCurrencyHeader()}</View>
         )
 
         const renderCurrencyHeader = () => (
             <View
                 style={{
-                    flexDirection: 'row',
-                    marginBottom: SIZES.padding
+                    flexDirection: "row",
+                    marginBottom: SIZES.padding,
                 }}
             >
                 <View style={{ flex: 1 }}>
                     <Text style={{ ...FONTS.h1 }}>Currencies</Text>
                 </View>
-                <TouchableOpacity
-                    onPress={() => console.log("View All")}
-                >
-                    <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>View All</Text>
+                <TouchableOpacity onPress={() => console.log("View All")}>
+                    <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>
+                        View All
+                    </Text>
                 </TouchableOpacity>
             </View>
-
         )
 
         const renderItem = ({ item }) => (
@@ -295,11 +313,9 @@ const Home = ({ navigation }) => {
                 style={{
                     marginVertical: SIZES.base,
                     width: SIZES.width / 2.5,
-
                 }}
                 onPress={() => console.log(item.title)}
             >
-
                 <View
                     style={{
                         padding: SIZES.padding,
@@ -307,8 +323,8 @@ const Home = ({ navigation }) => {
                         borderRadius: 20,
                         height: SIZES.width / 2.5,
                         width: SIZES.width / 2.5,
-                        alignItems: 'center',
-                        justifyContent:'center'
+                        alignItems: "center",
+                        justifyContent: "center",
                     }}
                 >
                     <Image
@@ -317,43 +333,42 @@ const Home = ({ navigation }) => {
                         style={{
                             height: SIZES.width / 3.7,
                             width: SIZES.width / 3.7,
-                            borderRadius:50,
-                            alignItems: 'center',
+                            borderRadius: 50,
+                            alignItems: "center",
                             marginVertical: 10,
-                            tintColor: item.color
+                            tintColor: item.color,
                         }}
                     />
-                
-                    <Text style={{fontSize: SIZES.width/20, fontWeight:"bold"}}>{item.title}</Text>
+
+                    <Text
+                        style={{
+                            fontSize: SIZES.width / 20,
+                            fontWeight: "bold",
+                        }}
+                    >
+                        {item.title} {Number(rate[item.title] * userBalance).toFixed(2)}
+                    </Text>
                     <Text style={{ ...FONTS.body4 }}>{item.description}</Text>
                 </View>
             </TouchableOpacity>
         )
 
-
         return (
-
             <FlatList
                 ListHeaderComponent={HeaderComponent}
                 contentContainerStyle={{ paddingHorizontal: SIZES.padding * 3 }}
                 numColumns={2}
-                columnWrapperStyle={{ justifyContent: 'space-between' }}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
                 data={currency}
-                keyExtractor={item => `${item.id}`}
+                keyExtractor={(item) => `${item.id}`}
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
-                ListFooterComponent={
-                    <View style={{ marginBottom: 30, }}>
-                    </View>
-                }
+                ListFooterComponent={<View style={{ marginBottom: 30 }}></View>}
             />
-            
         )
     }
 
     function renderVault() {
-
-
         const HeaderComponent = () => (
             <View>
                 {renderHeader()}
@@ -362,7 +377,6 @@ const Home = ({ navigation }) => {
                 {renderVaultHeader()}
             </View>
         )
-
 
         const renderVaultHeader = () => (
             <View
@@ -390,7 +404,6 @@ const Home = ({ navigation }) => {
                 }}
                 onPress={() => console.log(item.title)}
             >
-
                 <View
                     style={{
                         padding: SIZES.padding,
@@ -398,8 +411,8 @@ const Home = ({ navigation }) => {
                         borderRadius: 20,
                         height: SIZES.width / 2.5,
                         width: SIZES.width / 2.5,
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        alignItems: "center",
+                        justifyContent: "center",
                     }}
                 >
                     <Image
@@ -408,13 +421,22 @@ const Home = ({ navigation }) => {
                         style={{
                             height: SIZES.width / 4.5,
                             width: SIZES.width / 4.5,
-                            alignItems: 'center',
+                            alignItems: "center",
                             marginBottom: 10,
-                            tintColor: item.color
+                            tintColor: item.color,
                         }}
                     />
-                    <Text style={{fontSize: SIZES.width/20, fontWeight:"bold"}}>{item.title}</Text>
-                    <Text style={{ fontSize: SIZES.width/28}}>{item.amount}</Text>
+                    <Text
+                        style={{
+                            fontSize: SIZES.width / 20,
+                            fontWeight: "bold",
+                        }}
+                    >
+                        {item.title}
+                    </Text>
+                    <Text style={{ fontSize: SIZES.width / 28 }}>
+                        {item.amount}
+                    </Text>
                 </View>
             </TouchableOpacity>
         )
@@ -424,20 +446,18 @@ const Home = ({ navigation }) => {
                 ListHeaderComponent={HeaderComponent}
                 contentContainerStyle={{ paddingHorizontal: SIZES.padding * 3 }}
                 numColumns={2}
-                columnWrapperStyle={{ justifyContent: 'space-between' }}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
                 data={vault}
-                keyExtractor={item => `${item.id}`}
+                keyExtractor={(item) => `${item.id}`}
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
                 ListFooterComponent={<View style={{ marginBottom: 80 }}></View>}
             />
-            
         )
     }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-
             {renderVault()}
         </SafeAreaView>
     )

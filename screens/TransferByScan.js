@@ -21,7 +21,6 @@ const TransferByScan = ({ route, navigation }) => {
     const { userId, userBalance, transaction } = useAuth();
     const [amount, setAmount] = useState("");
     const [error, setError] = useState("");
-
     const handleTransfer = async () => {
         if (amount <= 0) {
             alert("Invalid amount. Please enter a valid amount");

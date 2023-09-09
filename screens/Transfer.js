@@ -50,7 +50,7 @@ const Transfer = ({navigation}) => {
         const balance = (await getDocs(q1)).docs[0].data().balance;
 
         if (balance < amount) {
-            alert("Insufficient amount in wallet to transfer. Please Top Up your wallet.");
+            alert("Insufficient amount in wallet to transfer. Please Top Up your balance!");
             return;
         }
         await updateDoc(doc(db, "users", receiver.id), {

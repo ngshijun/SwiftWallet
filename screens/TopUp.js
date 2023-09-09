@@ -24,7 +24,7 @@ import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 import { LinearGradient } from "expo-linear-gradient"
 
 
-const TopUp = () => {
+const TopUp = ({ navigation }) => {
     const [amount, setAmount] = useState(0)
     const handleAmountSelection = (selectedAmount) => {
         setAmount(selectedAmount.toString()); // Convert the selected amount to a string
@@ -135,33 +135,9 @@ const TopUp = () => {
                                 marginTop: 20,
                                 marginBottom:70,
                             }}
-                            onPress={() => {
-                                app.post("/payment-sheet", async (req, res) => {
-                                    // Use an existing Customer ID if this is a returning customer.
-                                    const customer = await stripe.customers.create()
-                                    const ephemeralKey = await stripe.ephemeralKeys.create(
-                                        { customer: customer.id },
-                                        { apiVersion: "2023-08-16" }
-                                    )
-                                    const paymentIntent = await stripe.paymentIntents.create({
-                                        amount: 1099,
-                                        currency: "eur",
-                                        customer: customer.id,
-                                        // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
-                                        automatic_payment_methods: {
-                                            enabled: true,
-                                        },
-                                    })
-
-                                    res.json({
-                                        paymentIntent: paymentIntent.client_secret,
-                                        ephemeralKey: ephemeralKey.secret,
-                                        customer: customer.id,
-                                        publishableKey:
-                                            "pk_test_51NJF7YEn2jRr5EOoKwsEMyJhY5tydUvwZV6RhV1QUFzlHxCgs75ZQX4xLM4nPTI3tQVpJr6B2dYQqLpljaxJiDqr00gsfcpfiP",
-                                    })
-                                })
-                            }}>
+                            onPress={() => 
+                                navigation.navigate("Checkout", {amount: amount})
+                            }>
                             <Text style={{ color: "#FFFFFF", ...FONTS.h3 }}>
                                 Top Up
                             </Text>
