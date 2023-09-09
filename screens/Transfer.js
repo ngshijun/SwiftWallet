@@ -1,5 +1,14 @@
 import { React, useState } from "react"
-import { View, TextInput, Button } from "react-native"
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    Image,
+    TextInput,
+    KeyboardAvoidingView,
+    ScrollView,
+    Platform,
+} from "react-native"
 import { useAuth } from "../contexts/AuthContext"
 import { db } from "../firebase"
 import {
@@ -11,6 +20,7 @@ import {
     increment,
     doc,
 } from "firebase/firestore"
+import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const Transfer = () => {
     const { userCountryCode, userPhoneNumber, transaction } = useAuth()
@@ -45,26 +55,104 @@ const Transfer = () => {
         await transaction(userId, id, amount, "Transfer")
     }
     return (
-        <View>
-            <TextInput
-                value={countryCode}
-                onChangeText={(mobile) => setCountryCode(mobile)}
-                placeholder="Country Code,for eg: +91"
-                keyboardType="numeric" // Show a numeric keyboard
-            />
-            <TextInput
-                value={mobile}
-                onChangeText={(mobile) => setMobile(mobile)}
-                placeholder="Mobile number"
-                keyboardType="numeric" // Show a numeric keyboard
-            />
-            <TextInput
-                value={amount}
-                onChangeText={(ammount) => setAmount(ammount)}
-                placeholder="Amount to Transfer"
-                keyboardType="numeric" // Show a numeric keyboard
-            />
-            <Button title="Transfer" onPress={handleTransfer} />
+        
+        <View style={{
+            marginTop: 70,
+            marginHorizontal: SIZES.padding * 3,
+        }}>
+            
+            <View style={{ marginTop: 10, }}>
+                <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
+                    Phone Number
+                </Text>
+
+                <View style={{ flexDirection: "row" }}>
+
+                    <TextInput
+                        style={{
+                            width: "20%",
+                            height: 50,
+                            marginRight: 20,
+                            marginVertical: SIZES.padding,
+                            borderBottomColor: "#FF7F11",
+                            borderBottomWidth: 1,
+                            height: 40,
+                            color: "#FF7F11",
+                            ...FONTS.body3,
+                        }}
+                        inputMode="email"
+                        autoCapitalize="none"
+                        value={countryCode}
+                        onChangeText={(mobile) => setCountryCode(mobile)}
+                        placeholder="+65"
+                        keyboardType="numeric"
+                        placeholderTextColor={"#333333"}
+                        selectionColor={"#FF7F11"}
+                    />
+                
+                    <TextInput
+                        style={{
+                            marginVertical: SIZES.padding,
+                            borderBottomColor: "#FF7F11",
+                            borderBottomWidth: 1,
+                            height: 40,
+                            width: "70%",
+                            color: "#FF7F11",
+                            ...FONTS.body3,
+                        }}
+                        value={mobile}
+                        keyboardType="numeric" // Show a numeric keyboard
+                        autoCapitalize="none"
+                        onChangeText={(mobile) => setMobile(mobile)}
+                        placeholder="Mobile number"
+                        placeholderTextColor={"#333333"}
+                        selectionColor={"#FF7F11"}
+                    />
+                </View>
+            </View>
+   
+
+            <View style={{ marginTop: 10, }}>
+                <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
+                    Amount
+                </Text>
+
+                <TextInput
+                    style={{
+                        marginVertical: SIZES.padding,
+                        borderBottomColor: "#FF7F11",
+                        borderBottomWidth: 1,
+                        height: 40,
+                        color: "#FF7F11",
+                        ...FONTS.body3,
+                    }}
+                    value={amount}
+                    onChangeText={(ammount) => setAmount(ammount)}
+                    placeholder="Amount to Transfer"
+                    keyboardType="numeric"
+                    placeholderTextColor={"#333333"}
+                    selectionColor={"#FF7F11"}
+                />
+            </View>
+
+
+            <TouchableOpacity
+                    title="Transfer"
+                    onPress={handleTransfer}
+                    style={{
+                        height: 60,
+                        backgroundColor: "#FF7F11",
+                        borderRadius: SIZES.radius / 1.5,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginTop: 20,
+                    }}
+                >
+                    <Text style={{ color: "#333333", ...FONTS.h3 }}>
+                        Transfer
+                    </Text>
+                </TouchableOpacity>
+                
         </View>
     )
 }
