@@ -11,7 +11,7 @@ import Svg, {
 } from 'react-native-svg'
 import { isIphoneX } from 'react-native-iphone-x-helper'
 
-import { Home, Scan } from "../screens"
+import { Home, Scan, History } from "../screens"
 import { COLORS, icons } from "../constants"
 import historyIcon from '../assets/icons/history.png'
 import homeIcon from '../assets/icons/home.png'
@@ -136,20 +136,16 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : "#333333"
+                                tintColor: focused ? COLORS.white : "#333333",
                             }}
                         />
                     ),
-                    tabBarButton: (props) => (
-                        <TabBarCustomButton
-                            {...props}
-                        />
-                    )
+                    tabBarButton: (props) => <TabBarCustomButton {...props} />,
                 }}
             />
             <Tab.Screen
                 name="History"
-                component={Home}
+                component={History}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Image
@@ -158,7 +154,7 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : "#333333"
+                                tintColor: focused ? COLORS.white : "#333333",
                             }}
                         />
                     ),
@@ -176,7 +172,7 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : "#333333"
+                                tintColor: focused ? COLORS.white : "#333333",
                             }}
                         />
                     ),
@@ -195,7 +191,7 @@ const Tabs = () => {
                             style={{
                                 width: 25,
                                 height: 25,
-                                tintColor: focused ? COLORS.white : "#333333"
+                                tintColor: focused ? COLORS.white : "#333333",
                             }}
                         />
                     ),

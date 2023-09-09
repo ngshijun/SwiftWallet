@@ -94,7 +94,7 @@ const SignUp = ({ navigation }) => {
                         width: 150,
                         borderRadius: 50,
                         borderWidth: 2,
-                        borderColor: "#333333"
+                        borderColor: "#333333",
                     }}
                 />
             </View>
@@ -272,9 +272,9 @@ const SignUp = ({ navigation }) => {
                         alignItems: "center",
                         justifyContent: "center",
                     }}
-                    onPress={() =>
-                        signUp(email, countryCode, phoneNumber, password).then(
-                            navigation.navigate("SignIn")
+                    onPress={async () =>
+                        await signUp(email, countryCode, phoneNumber, password).then(
+                            () => navigation.navigate("SignIn")
                         )
                     }
                 >
@@ -358,16 +358,14 @@ const SignUp = ({ navigation }) => {
                     flexDirection: "row",
                     marginTop: SIZES.padding * 2,
                     justifyContent: "center",
-                    marginBottom:100,
+                    marginBottom: 100,
                 }}
                 onPress={() => navigation.navigate("SignIn")}
             >
                 <Text style={{ color: "#333333", ...FONTS.body3 }}>
                     Already have an account?{" "}
                 </Text>
-                <Text style={{ color: "#FF7F11", ...FONTS.h3 }}>
-                    Sign In
-                </Text>
+                <Text style={{ color: "#FF7F11", ...FONTS.h3 }}>Sign In</Text>
             </TouchableOpacity>
         )
     }
@@ -377,10 +375,7 @@ const SignUp = ({ navigation }) => {
             behavior={Platform.OS === "ios" ? "padding" : null}
             style={{ flex: 1 }}
         >
-            <LinearGradient
-                colors={["#FFFFFF","#FFFFFF"]}
-                style={{ flex: 1 }}
-            >
+            <LinearGradient colors={["#FFFFFF", "#FFFFFF"]} style={{ flex: 1 }}>
                 <ScrollView>
                     {renderHeader()}
                     {renderLogo()}

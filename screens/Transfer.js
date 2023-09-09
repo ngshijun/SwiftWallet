@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore"
 
 const Transfer = () => {
-    const { userCountryCode, userPhoneNumber } = useAuth()
+    const { userCountryCode, userPhoneNumber, transaction } = useAuth()
     const [mobile, setMobile] = useState("")
     const [countryCode, setCountryCode] = useState("")
     const [amount, setAmount] = useState("")
@@ -24,14 +24,11 @@ const Transfer = () => {
             alert("Invalid amount. Please enter a valid amount")
             return
         }
-
-        console.log(mobile, amount)
         const q = query(
             collection(db, "users"),
             where("phoneNumber", "==", mobile),
             where("countryCode", "==", countryCode)
         )
-        console.log(userPhoneNumber, userCountryCode)
         const q1 = query(
             collection(db, "users"),
             where("phoneNumber", "==", userPhoneNumber),
@@ -45,6 +42,7 @@ const Transfer = () => {
         await updateDoc(doc(db, "users", userId), {
             balance: increment(-amount),
         })
+        await transaction(userId, id, amount, "Transfer")
     }
     return (
         <View>

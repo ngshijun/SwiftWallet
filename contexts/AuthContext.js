@@ -13,6 +13,9 @@ import {
     onSnapshot,
     query,
     where,
+    setDoc,
+    doc,
+    orderBy,
 } from "@firebase/firestore"
 
 const AuthContext = React.createContext()
@@ -29,16 +32,21 @@ export function AuthProvider({ children }) {
     const [userCountryCode, setUserCountryCode] = useState("")
     const [userPhoneNumber, setUserPhoneNumber] = useState("")
     const [loading, setLoading] = useState(true)
+    const [history, setHistory] = useState([])
 
     async function signup(email, password, countryCode, phoneNumber) {
-        await addDoc(collection(db, "users"), {
-            email,
-            countryCode,
-            phoneNumber,
-            password,
-            balance: 0,
-        })
-        await createUserWithEmailAndPassword(auth, email, password)
+        await createUserWithEmailAndPassword(auth, email, password).then(
+            (userCredential) => {
+                console.log(userCredential.user.uid)
+                setDoc(doc(db, "users", userCredential.user.uid), {
+                    email,
+                    countryCode,
+                    phoneNumber,
+                    password,
+                    balance: 0,
+                })
+            }
+        )
     }
 
     async function login(email, password) {
@@ -95,8 +103,32 @@ export function AuthProvider({ children }) {
                     setUserPhoneNumber(doc.data().phoneNumber)
                 })
             })
+            const q1 = query(collection(db, "users", user.uid, "transactions"), orderBy("time", "desc"))
+            onSnapshot(q1, (querySnapshot) => {
+                setHistory([])
+                querySnapshot.forEach((doc) => {
+                    setHistory((history) => [...history, doc.data()])
+                })
+            })
         }
     }, [user])
+
+    async function transaction(senderId, receiverId, amount, description) {
+        date = new Date()
+        time = formatDate(date)
+        await addDoc(collection(db, "users", senderId, "transactions"), {
+            type: "debit",
+            amount,
+            description,
+            time,
+        })
+        await addDoc(collection(db, "users", receiverId, "transactions"), {
+            type: "credit",
+            amount,
+            description,
+            time,
+        })
+    }
 
     const value = {
         user,
@@ -104,12 +136,25 @@ export function AuthProvider({ children }) {
         userEmail,
         userCountryCode,
         userPhoneNumber,
+        history,
         signup,
         login,
         logout,
         resetPassword,
         updateEmail,
         updatePassword,
+        transaction,
+    }
+
+    const formatDate = (date) => {
+        const year = date.getFullYear()
+        const month = String(date.getMonth() + 1).padStart(2, "0")
+        const day = String(date.getDate()).padStart(2, "0")
+        const hours = String(date.getHours()).padStart(2, "0")
+        const minutes = String(date.getMinutes()).padStart(2, "0")
+        const seconds = String(date.getSeconds()).padStart(2, "0")
+
+        return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
     }
 
     return (
