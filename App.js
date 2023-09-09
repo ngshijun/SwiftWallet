@@ -6,47 +6,47 @@
  * @flow strict-local
  */
 
-import React from "react"
+import React from "react";
 
-import { StripeProvider } from "@stripe/stripe-react-native"
-import { SignUp, SignIn, Transfer, TopUp, Pay } from "./screens"
-import { createStackNavigator } from "@react-navigation/stack"
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
-import { useFonts } from "expo-font"
-import { AuthProvider } from "./contexts/AuthContext"
-import Tabs from "./navigation/tabs"
+import { StripeProvider } from "@stripe/stripe-react-native";
+import { SignUp, SignIn, Transfer, TopUp, Pay, TransferByScan } from "./screens";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { AuthProvider } from "./contexts/AuthContext";
+import Tabs from "./navigation/tabs";
 
 const SwiftTheme = {
     dark: false,
     colors: {
-      primary: 'rgb(255, 127, 17)',
-      background: 'rgb(255, 255, 255)',
-      card: 'rgb(255, 255, 255)',
-      text: 'rgb(255, 127, 17)',
-      border: 'rgb(216, 216, 216)',
-      notification: 'rgb(255, 59, 48)',
+        primary: "rgb(255, 127, 17)",
+        background: "rgb(255, 255, 255)",
+        card: "rgb(255, 255, 255)",
+        text: "rgb(255, 127, 17)",
+        border: "rgb(216, 216, 216)",
+        notification: "rgb(255, 59, 48)",
     },
-  };
-  
-  const theme = {
+};
+
+const theme = {
     ...SwiftTheme,
     colors: {
-      ...SwiftTheme.colors,
-      border: 'transparent',
+        ...SwiftTheme.colors,
+        border: "transparent",
     },
-  };
-  
-const Stack = createStackNavigator()
+};
+
+const Stack = createStackNavigator();
 
 const App = () => {
     const [loaded] = useFonts({
         "Roboto-Black": require("./assets/fonts/Roboto-Black.ttf"),
         "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
         "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
-    })
+    });
 
     if (!loaded) {
-        return null
+        return null;
     }
     return (
         <StripeProvider
@@ -66,20 +66,17 @@ const App = () => {
                         <Stack.Screen name="SignIn" component={SignIn} />
 
                         {/* Tabs */}
-                        <Stack.Screen
-                            name="HomeTabs"
-                            component={Tabs}
-                            options={{ headerShown: false }} 
-                        />
+                        <Stack.Screen name="HomeTabs" component={Tabs} options={{ headerShown: false }} />
                         <Stack.Screen name="Transfer" component={Transfer} />
-                        <Stack.Screen name="TopUp" component={TopUp} />    
-                        <Stack.Screen name="Pay" component={Pay} />                        
+                        <Stack.Screen name="TopUp" component={TopUp} />
+                        <Stack.Screen name="Pay" component={Pay} />
+                        <Stack.Screen name="TransferByScan" component={TransferByScan} />
                         {/* <Stack.Screen name="Scan" component={Scan} /> */}
                     </Stack.Navigator>
                 </AuthProvider>
             </NavigationContainer>
         </StripeProvider>
-    )
-}
+    );
+};
 
-export default App
+export default App;
