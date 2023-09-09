@@ -7,6 +7,8 @@ import {
 } from "react-native"
 import { Camera } from 'expo-camera'
 import { COLORS, FONTS, SIZES, icons, images } from "../constants";
+import QRIcon from '../assets/icons/qr-code.png'
+
 
 const Scan = ({ navigation }) => {
     const [hasPermission, setHasPermission] = React.useState(null);
@@ -172,7 +174,7 @@ const Scan = ({ navigation }) => {
                             }}
                         >
                             <Image
-                                source={icons.barcode}
+                                source={QRIcon}
                                 resizeMode="cover"
                                 style={{
                                     height: 25,
@@ -181,7 +183,7 @@ const Scan = ({ navigation }) => {
                                 }}
                             />
                         </View>
-                        <Text style={{ marginLeft: SIZES.padding, ...FONTS.body4 }}>Barcode</Text>
+                        <Text style={{ marginLeft: SIZES.padding, ...FONTS.body4 }}>QR code</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -205,7 +207,7 @@ const Scan = ({ navigation }) => {
                 onBarCodeScanned={onBarCodeRead}
                 androidCameraPermissionOptions={{
                     title: "Permission to use camera",
-                    message: "Camera is required for barcode scanning",
+                    message: "Camera is required for QR code scanning",
                     buttonPositive: "OK",
                     buttonNegative: "Cancel"
                 }}

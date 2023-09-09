@@ -10,6 +10,15 @@ import {
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 import payIcon from '../assets/icons/pay.png'
 import currencyIcon from '../assets/icons/currency.png'
+import sgIcon from '../assets/icons/singapore.png'
+import myIcon from '../assets/icons/malaysia.png'
+import usaIcon from '../assets/icons/united-states-of-america.png'
+import hkIcon from '../assets/icons/hong-kong.png'
+import holidyIcon from '../assets/icons/vacation.png'
+import savingIcon from '../assets/icons/saving.png'
+import shoppingIcon from '../assets/icons/shopping.png'
+import educationIcon from '../assets/icons/education.png'
+
 import { useAuth } from "../contexts/AuthContext"
 
 const Home = ({ navigation }) => {
@@ -50,22 +59,22 @@ const Home = ({ navigation }) => {
     const currencyData = [
         {
             id: 1,
-            img: images.promoBanner,
+            img: sgIcon,
             title: "SGD 88.50",
         },
         {
             id: 2,
-            img: images.promoBanner,
+            img: usaIcon,
             title: "USD 49.3",
         },
         {
             id: 3,
-            img: images.promoBanner,
+            img: myIcon,
             title: "MYR 56.00",
         },
         {
             id: 4,
-            img: images.promoBanner,
+            img: hkIcon,
             title: "HKD 300,66",
         },
     ]
@@ -73,27 +82,27 @@ const Home = ({ navigation }) => {
     const vaultData = [
         {
             id: 1,
-            img: images.promoBanner,
+            img: shoppingIcon,
             title: "Shopping",
             amount: "230 SGD",
 
         },
         {
             id: 2,
-            img: images.promoBanner,
+            img: savingIcon,
             title: "Reserve Fund",
             amount: "500 SGD",
         },
         {
             id: 3,
-            img: images.promoBanner,
+            img: educationIcon,
             title: "Education Fund",
             amount: "500 SGD",
 
         },
         {
             id: 4,
-            img: images.promoBanner,
+            img: holidyIcon,
             title: " Holiday",
             amount: "500 SGD",
         },
@@ -302,7 +311,7 @@ const Home = ({ navigation }) => {
                     }}
                 >
                     <Image
-                        source={images.wallieLogo}
+                        source={item.img}
                         resizeMode="contain"
                         style={{
                             height: 100,
@@ -392,19 +401,18 @@ const Home = ({ navigation }) => {
                     }}
                 >
                     <Image
-                        source={images.wallieLogo}
+                        source={item.img}
                         resizeMode="contain"
                         style={{
-                            height: 100,
-                            width: 100,
-                            borderRadius:50,
+                            height: 80,
+                            width: 80,
                             alignItems: 'center',
                             marginBottom: 10,
                             tintColor: item.color
                         }}
                     />
                     <Text style={{ ...FONTS.h4 }}>{item.title}</Text>
-                    <Text style={{ ...FONTS.body4 }}>{item.description}</Text>
+                    <Text style={{ ...FONTS.body3 }}>{item.amount}</Text>
                 </View>
             </TouchableOpacity>
         )
