@@ -16,14 +16,26 @@ import { useFonts } from "expo-font"
 import { AuthProvider } from "./contexts/AuthContext"
 import Tabs from "./navigation/tabs"
 
-const theme = {
-    ...DefaultTheme,
+const SwiftTheme = {
+    dark: false,
     colors: {
-        ...DefaultTheme.colors,
-        border: "transparent",
+      primary: 'rgb(255, 127, 17)',
+      background: 'rgb(255, 255, 255)',
+      card: 'rgb(255, 255, 255)',
+      text: 'rgb(255, 127, 17)',
+      border: 'rgb(216, 216, 216)',
+      notification: 'rgb(255, 59, 48)',
     },
-}
-
+  };
+  
+  const theme = {
+    ...SwiftTheme,
+    colors: {
+      ...SwiftTheme.colors,
+      border: 'transparent',
+    },
+  };
+  
 const Stack = createStackNavigator()
 
 const App = () => {
