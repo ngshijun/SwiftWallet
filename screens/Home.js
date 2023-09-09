@@ -10,10 +10,10 @@ import {
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 import payIcon from "../assets/icons/pay.png"
 import currencyIcon from "../assets/icons/currency.png"
-import sgIcon from "../assets/icons/singapore.png"
+import ukIcon from "../assets/icons/united-kingdom.png"
 import myIcon from "../assets/icons/malaysia.png"
 import usaIcon from "../assets/icons/united-states-of-america.png"
-import hkIcon from "../assets/icons/hong-kong.png"
+import euIcon from "../assets/icons/european.png"
 import holidyIcon from "../assets/icons/vacation.png"
 import savingIcon from "../assets/icons/saving.png"
 import shoppingIcon from "../assets/icons/shopping.png"
@@ -78,7 +78,7 @@ const Home = ({ navigation }) => {
     const currencyData = [
         {
             id: 1,
-            img: sgIcon,
+            img: ukIcon,
             title: "GBP",
         },
         {
@@ -93,8 +93,8 @@ const Home = ({ navigation }) => {
         },
         {
             id: 4,
-            img: hkIcon,
-            title: "HKD",
+            img: euIcon,
+            title: "EUR",
         },
     ]
 
@@ -264,6 +264,7 @@ const Home = ({ navigation }) => {
                         <TouchableOpacity
                             onPress={() => {
                                 // Handle button press here
+                                navigation.navigate("Withdraw")
                             }}
                             style={{
                                 backgroundColor: "#333333",
