@@ -9,7 +9,7 @@
 import React from "react"
 
 import { StripeProvider } from "@stripe/stripe-react-native"
-import { SignUp, SignIn, Transfer, TopUp } from "./screens"
+import { SignUp, SignIn, Transfer, TopUp, Pay } from "./screens"
 import { createStackNavigator } from "@react-navigation/stack"
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
 import { useFonts } from "expo-font"
@@ -67,12 +67,13 @@ const App = () => {
 
                         {/* Tabs */}
                         <Stack.Screen
-                            name="Home"
+                            name="HomeTabs"
                             component={Tabs}
                             options={{ headerShown: false }} 
                         />
                         <Stack.Screen name="Transfer" component={Transfer} />
-                        <Stack.Screen name="TopUp" component={TopUp} />                        
+                        <Stack.Screen name="TopUp" component={TopUp} />    
+                        <Stack.Screen name="Pay" component={Pay} />                        
                         {/* <Stack.Screen name="Scan" component={Scan} /> */}
                     </Stack.Navigator>
                 </AuthProvider>

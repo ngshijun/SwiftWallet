@@ -88,7 +88,7 @@ const SignUp = ({ navigation }) => {
             >
                 <Image
                     source={images.wallieLogo}
-                    resizeMode=""
+                    resizeMode="contain"
                     style={{
                         height: 150,
                         width: 150,
@@ -122,7 +122,7 @@ const SignUp = ({ navigation }) => {
                             color: "#FF7F11",
                             ...FONTS.body3,
                         }}
-                        inputMode="username"
+                        inputMode="text"
                         autoCapitalize="none"
                         onChangeText={(text) => setUsername(text)}
                         placeholder="Enter Username"

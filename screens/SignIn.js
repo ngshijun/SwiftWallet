@@ -15,16 +15,11 @@ import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const SignIn = ({ navigation }) => {
     const { login, user } = useAuth()
-    useEffect(() => {
-        if (user) {
-            navigation.navigate("Home")
-        }
-    }, [user])
 
     const handleSignIn = async (email, password) => {
         try {
             await login(email, password)
-            navigation.navigate("Home")
+            navigation.navigate("HomeTabs")
         } catch (e) {
             console.log(e)
         }
