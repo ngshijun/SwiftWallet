@@ -20,7 +20,13 @@ import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const SignUp = ({ navigation }) => {
     const { signup } = useAuth()
-    const signUp = async (username, email, countryCode, phoneNumber, password) => {
+    const signUp = async (
+        username,
+        email,
+        countryCode,
+        phoneNumber,
+        password
+    ) => {
         try {
             await signup(username, email, password, countryCode, phoneNumber)
         } catch (e) {
@@ -50,6 +56,18 @@ const SignUp = ({ navigation }) => {
                         flag: item.flags.png,
                         callingCode: item.idd?.root + item.idd?.suffixes[0],
                     }
+                })
+                areaData.sort((a, b) => {
+                    let fa = a.name.toLowerCase(),
+                        fb = b.name.toLowerCase()
+
+                    if (fa < fb) {
+                        return -1
+                    }
+                    if (fa > fb) {
+                        return 1
+                    }
+                    return 0
                 })
                 setAreas(areaData)
 
@@ -295,9 +313,13 @@ const SignUp = ({ navigation }) => {
                         justifyContent: "center",
                     }}
                     onPress={async () =>
-                        await signUp(username, email, countryCode, phoneNumber, password).then(
-                            () => navigation.navigate("SignIn")
-                        )
+                        await signUp(
+                            username,
+                            email,
+                            countryCode,
+                            phoneNumber,
+                            password
+                        ).then(() => navigation.navigate("SignIn"))
                     }
                 >
                     <Text style={{ color: "#333333", ...FONTS.h3 }}>
