@@ -121,7 +121,7 @@ const Home = ({ navigation }) => {
                         style={{
                             width: 100,
                             height: 100,
-                            borderRadius:50,
+                            borderRadius:100,
                             alignItems: "center",
                             borderWidth:  1,
                         }}
@@ -308,22 +308,23 @@ const Home = ({ navigation }) => {
                         height: SIZES.width / 2.5,
                         width: SIZES.width / 2.5,
                         alignItems: 'center',
+                        justifyContent:'center'
                     }}
                 >
                     <Image
                         source={item.img}
                         resizeMode="contain"
                         style={{
-                            height: 100,
-                            width: 100,
+                            height: SIZES.width / 3.7,
+                            width: SIZES.width / 3.7,
                             borderRadius:50,
                             alignItems: 'center',
-                            marginBottom: 10,
+                            marginVertical: 10,
                             tintColor: item.color
                         }}
                     />
                 
-                    <Text style={{ ...FONTS.h4 }}>{item.title}</Text>
+                    <Text style={{fontSize: SIZES.width/20, fontWeight:"bold"}}>{item.title}</Text>
                     <Text style={{ ...FONTS.body4 }}>{item.description}</Text>
                 </View>
             </TouchableOpacity>
@@ -398,21 +399,22 @@ const Home = ({ navigation }) => {
                         height: SIZES.width / 2.5,
                         width: SIZES.width / 2.5,
                         alignItems: 'center',
+                        justifyContent: 'center',
                     }}
                 >
                     <Image
                         source={item.img}
                         resizeMode="contain"
                         style={{
-                            height: 80,
-                            width: 80,
+                            height: SIZES.width / 4.5,
+                            width: SIZES.width / 4.5,
                             alignItems: 'center',
                             marginBottom: 10,
                             tintColor: item.color
                         }}
                     />
-                    <Text style={{ ...FONTS.h4 }}>{item.title}</Text>
-                    <Text style={{ ...FONTS.body3 }}>{item.amount}</Text>
+                    <Text style={{fontSize: SIZES.width/20, fontWeight:"bold"}}>{item.title}</Text>
+                    <Text style={{ fontSize: SIZES.width/28}}>{item.amount}</Text>
                 </View>
             </TouchableOpacity>
         )

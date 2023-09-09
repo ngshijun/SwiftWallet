@@ -22,7 +22,8 @@ import {
 } from "firebase/firestore"
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
-const Transfer = () => {
+const Transfer = ({navigation}) => {
+    const[buttonPressed, setButtonPressed] = useState(false)
     const { userCountryCode, userPhoneNumber, transaction } = useAuth()
     const [mobile, setMobile] = useState("")
     const [countryCode, setCountryCode] = useState("")
@@ -53,7 +54,8 @@ const Transfer = () => {
             balance: increment(-amount),
         })
         await transaction(userId, id, amount, "Transfer")
-    }
+        alert("Transaction successful")
+    } 
     return (
         
         <View style={{
@@ -138,7 +140,10 @@ const Transfer = () => {
 
             <TouchableOpacity
                     title="Transfer"
-                    onPress={handleTransfer}
+                    onPress={() => {
+                        setButtonPressed(true)
+                        handleTransfer().then(() => navigation.navigate("Home"))}}
+                    disabled={buttonPressed}
                     style={{
                         height: 60,
                         backgroundColor: "#FF7F11",

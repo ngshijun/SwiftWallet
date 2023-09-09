@@ -26,6 +26,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState()
+    const [username, setUsername] = useState("")
     const [userEmail, setUserEmail] = useState("")
     const [password, setPassword] = useState("")
     const [userBalance, setUserBalance] = useState(0)
@@ -34,11 +35,12 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true)
     const [history, setHistory] = useState([])
 
-    async function signup(email, password, countryCode, phoneNumber) {
+    async function signup(username, email, password, countryCode, phoneNumber) {
         await createUserWithEmailAndPassword(auth, email, password).then(
             (userCredential) => {
                 console.log(userCredential.user.uid)
                 setDoc(doc(db, "users", userCredential.user.uid), {
+                    username,
                     email,
                     countryCode,
                     phoneNumber,
@@ -83,8 +85,8 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user)
-            setLoading(false)
+                setUser(user)
+                setLoading(false)
         })
         return unsubscribe
     }, [])
@@ -96,7 +98,13 @@ export function AuthProvider({ children }) {
                 where("email", "==", user.email)
             )
             onSnapshot(q, (querySnapshot) => {
+                setUsername(null)
+                setUserEmail(null)
+                setUserBalance(null)
+                setUserCountryCode(null)
+                setUserPhoneNumber(null)
                 querySnapshot.forEach((doc) => {
+                    setUsername(doc.data().username)
                     setUserEmail(doc.data().email)
                     setUserBalance(doc.data().balance)
                     setUserCountryCode(doc.data().countryCode)
@@ -129,9 +137,11 @@ export function AuthProvider({ children }) {
             time,
         })
     }
+      
 
     const value = {
         user,
+        username,
         userBalance,
         userEmail,
         userCountryCode,
@@ -153,9 +163,16 @@ export function AuthProvider({ children }) {
         const hours = String(date.getHours()).padStart(2, "0")
         const minutes = String(date.getMinutes()).padStart(2, "0")
         const seconds = String(date.getSeconds()).padStart(2, "0")
-
         return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
     }
+
+    const formatTime = (date) => {
+        const hours = String(date.getHours()).padStart(2, "0")
+        const minutes = String(date.getMinutes()).padStart(2, "0")
+        const seconds = String(date.getSeconds()).padStart(2, "0")
+        return `${hours}:${minutes}:${seconds}`
+    }
+    
 
     return (
         <AuthContext.Provider value={value}>
