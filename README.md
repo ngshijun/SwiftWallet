@@ -15,6 +15,7 @@
    
    Year 2 NUS Computer Science student, completed Orbital 2023 at Gemini Level.
 5) Tsui Yi Wern
+   
    Year 2 NUS Computer Science student, completed Orbital 2023 at Artemis Level and received Honorable Mention.
 
 
