@@ -52,7 +52,7 @@ const Checkout = ({route, navigation}) => {
                         marginHorizontal: SIZES.padding * 3,
                     }}>
                         <Text style={{color: "#FF7F11", ...FONTS.largeTitle, fontWeight: 'bold'}}>Top Up</Text>
-                        <Text style={{fcolor: "#333333", ...FONTS.h2}}>Select an amount</Text>
+
                         
                         <View style={{ marginTop: 10, }}>
                             <Text style={{ color: "#FF7F11", ...FONTS.h2 }}>
