@@ -75,7 +75,7 @@ const Home = ({ navigation }) => {
         {
             id: 4,
             img: hkIcon,
-            title: "HKD 300,66",
+            title: "HKD 300.66",
         },
     ]
 

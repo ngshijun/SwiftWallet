@@ -2,6 +2,7 @@ import React from "react";
 import {
     View,
     Text,
+    TextInput,
     Image,
     TouchableOpacity
 } from "react-native"
@@ -192,7 +193,7 @@ const Scan = ({ navigation }) => {
 
     function onBarCodeRead(result) {
         const userId = result.data
-        navigation.navigate("Transfer", {userId})
+        navigation.navigate("TransferByScan", {userId})
     }
 
     return (
