@@ -26,6 +26,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState()
+    const [userId, setUserId] = useState("")
     const [username, setUsername] = useState("")
     const [userEmail, setUserEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -98,12 +99,14 @@ export function AuthProvider({ children }) {
                 where("email", "==", user.email)
             )
             onSnapshot(q, (querySnapshot) => {
+                setUserId(null)
                 setUsername(null)
                 setUserEmail(null)
                 setUserBalance(null)
                 setUserCountryCode(null)
                 setUserPhoneNumber(null)
                 querySnapshot.forEach((doc) => {
+                    setUserId(doc.id)
                     setUsername(doc.data().username)
                     setUserEmail(doc.data().email)
                     setUserBalance(doc.data().balance)
@@ -121,26 +124,31 @@ export function AuthProvider({ children }) {
         }
     }, [user])
 
-    async function transaction(senderId, receiverId, amount, description) {
+    async function transaction(sender, receiver, amount, description) {
+        console.log(sender.id)
+        console.log(receiver.id)
         date = new Date()
         time = formatDate(date)
-        await addDoc(collection(db, "users", senderId, "transactions"), {
-            type: "debit",
-            amount,
-            description,
-            time,
-        })
-        await addDoc(collection(db, "users", receiverId, "transactions"), {
+        await addDoc(collection(db, "users", sender.id, "transactions"), {
             type: "credit",
             amount,
             description,
             time,
+            receiver: receiver.data().username
+        })
+        await addDoc(collection(db, "users", receiver.id, "transactions"), {
+            type: "debit",
+            amount,
+            description,
+            time,
+            sender: sender.data().username
         })
     }
       
 
     const value = {
         user,
+        userId,
         username,
         userBalance,
         userEmail,

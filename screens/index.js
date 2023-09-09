@@ -6,5 +6,6 @@ import Transfer from "./Transfer"
 import TopUp from "./TopUp"
 import History from "./History"
 import Profile from "./Profile"
+import Pay from "./Pay"
 
-export { Home, Scan, SignUp, SignIn, Transfer, TopUp, History, Profile }
+export { Home, Scan, SignUp, SignIn, Transfer, TopUp, History, Profile, Pay }

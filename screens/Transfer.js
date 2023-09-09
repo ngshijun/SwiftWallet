@@ -45,15 +45,21 @@ const Transfer = ({navigation}) => {
             where("phoneNumber", "==", userPhoneNumber),
             where("countryCode", "==", userCountryCode)
         )
-        const id = (await getDocs(q)).docs[0].id
-        const userId = (await getDocs(q1)).docs[0].id
-        await updateDoc(doc(db, "users", id), {
+        const receiver = (await getDocs(q)).docs[0]
+        const sender = (await getDocs(q1)).docs[0]
+        const balance = (await getDocs(q1)).docs[0].data().balance;
+
+        if (balance < amount) {
+            alert("Insufficient amount in wallet to transfer. Please Top Up your wallet.");
+            return;
+        }
+        await updateDoc(doc(db, "users", receiver.id), {
             balance: increment(amount),
         })
-        await updateDoc(doc(db, "users", userId), {
+        await updateDoc(doc(db, "users", sender.id), {
             balance: increment(-amount),
         })
-        await transaction(userId, id, amount, "Transfer")
+        await transaction(sender, receiver, amount, "Transfer")
         alert("Transaction successful")
     } 
     return (

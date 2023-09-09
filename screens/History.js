@@ -60,13 +60,14 @@ const History = () => {
                                     {item.name}
                                 </Text>
                                 {/* Conditional rendering based on item.type */}
-                                {item.type === 'credit' ? (
+                                {item.type === 'debit' ? (
                                 <Text style={{ fontSize: SIZES.width / 20, fontWeight: "bold", color: COLORS.green }}>
-                                    {' + ' + "SGD " + item.amount}
+                                    {' + ' + "SGD " + item.amount} from {item.sender}
                                 </Text>
+                                
                                 ) : (
                                 <Text style={{ fontSize: SIZES.width / 20, fontWeight: "bold", color: COLORS.red }}>
-                                    {' - ' + "SGD " + item.amount}
+                                    {' - ' + "SGD " + item.amount} to {item.receiver}
                                 </Text>
                                 )}
                                 <Text style={{ fontSize: SIZES.width / 24}}>{item.time}</Text>
