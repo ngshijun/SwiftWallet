@@ -3,12 +3,16 @@
 
 ## Team Members
 1) Ng Shi Jun (Team Leader)
+   
    Year 3 NUS Computer Science student, completed Orbital 2022 at Artemis Level.
 2) Yong Li An
+   
    Year 2 NUS Computer Science student, completed Orbital 2023 at Artemis Level and received Honorable Mention.
 3) Yeo Zi Yi
+   
    Year 2 NUS Computer Science student, completed Orbital 2023 at Gemini Level.
 4) Foo Tzie Huang
+   
    Year 2 NUS Computer Science student, completed Orbital 2023 at Gemini Level.
 5) Tsui Yi Wern
    Year 2 NUS Computer Science student, completed Orbital 2023 at Artemis Level and received Honorable Mention.
