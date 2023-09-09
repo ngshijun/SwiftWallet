@@ -90,13 +90,13 @@ const Home = ({ navigation }) => {
         {
             id: 2,
             img: savingIcon,
-            title: "Reserve Fund",
+            title: "Savings",
             amount: "500 SGD",
         },
         {
             id: 3,
             img: educationIcon,
-            title: "Education Fund",
+            title: "Education",
             amount: "500 SGD",
 
         },
