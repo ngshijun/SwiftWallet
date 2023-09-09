@@ -56,7 +56,9 @@ const History = () => {
                                 position: 'relative', // Use relative positioning for the parent view
                                 }}
                             >
-                                
+                                <Text style={{ fontSize: SIZES.width / 20, fontWeight: "bold", color: COLORS.red }}>
+                                    {item.name}
+                                </Text>
                                 {/* Conditional rendering based on item.type */}
                                 {item.type === 'credit' ? (
                                 <Text style={{ fontSize: SIZES.width / 20, fontWeight: "bold", color: COLORS.green }}>
