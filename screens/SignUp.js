@@ -20,9 +20,9 @@ import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const SignUp = ({ navigation }) => {
     const { signup } = useAuth()
-    const signUp = async (email, countryCode, phoneNumber, password) => {
+    const signUp = async (username, email, countryCode, phoneNumber, password) => {
         try {
-            await signup(email, password, countryCode, phoneNumber)
+            await signup(username, email, password, countryCode, phoneNumber)
         } catch (e) {
             console.log(e)
         }
@@ -33,7 +33,7 @@ const SignUp = ({ navigation }) => {
     const [areas, setAreas] = React.useState([])
     const [selectedArea, setSelectedArea] = React.useState(null)
     const [modalVisible, setModalVisible] = React.useState(false)
-
+    const [username, setUsername] = React.useState(null)
     const [email, setEmail] = React.useState(null)
     const [countryCode, setCountryCode] = React.useState(null)
     const [phoneNumber, setPhoneNumber] = React.useState(null)
@@ -109,6 +109,28 @@ const SignUp = ({ navigation }) => {
                     marginHorizontal: SIZES.padding * 3,
                 }}
             >
+                <View style={{ marginTop: SIZES.padding * 3 }}>
+                    <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
+                        Username
+                    </Text>
+                    <TextInput
+                        style={{
+                            marginVertical: SIZES.padding,
+                            borderBottomColor: "#FF7F11",
+                            borderBottomWidth: 1,
+                            height: 40,
+                            color: "#FF7F11",
+                            ...FONTS.body3,
+                        }}
+                        inputMode="username"
+                        autoCapitalize="none"
+                        onChangeText={(text) => setUsername(text)}
+                        placeholder="Enter Username"
+                        placeholderTextColor={"#333333"}
+                        selectionColor={"#FF7F11"}
+                    />
+                </View>
+
                 {/* Email */}
                 <View style={{ marginTop: SIZES.padding * 3 }}>
                     <Text style={{ color: "#FF7F11", ...FONTS.body3 }}>
@@ -273,7 +295,7 @@ const SignUp = ({ navigation }) => {
                         justifyContent: "center",
                     }}
                     onPress={async () =>
-                        await signUp(email, countryCode, phoneNumber, password).then(
+                        await signUp(username, email, countryCode, phoneNumber, password).then(
                             () => navigation.navigate("SignIn")
                         )
                     }
